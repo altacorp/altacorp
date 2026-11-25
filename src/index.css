@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Spline Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-navy: #0B1728;
+  --color-navy-deep: #07101D;
+  --color-tech: #0868D7;
+  --color-tech-hover: #0657B6;
+  --color-surface: #F3F6FA;
+  --color-border: #DCE3EC;
+  --color-muted: #64748B;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: #0B1728;
+    background-color: #FFFFFF;
+    scroll-padding-top: 84px;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* Focus ring for keyboard accessibility */
+  :focus-visible {
+    outline: 2px solid #0868D7;
+    outline-offset: 2px;
+  }
+}
+
+/* Subtle architectural blueprint grid background */
+.bg-arch-grid-light {
+  background-image:
+    linear-gradient(to right, rgba(220, 227, 236, 0.55) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(220, 227, 236, 0.55) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.bg-arch-grid-dark {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Discreet functional entrance animation */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-reveal {
+  animation: fadeSlideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-reveal {
+    animation: none;
+  }
+}
