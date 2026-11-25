@@ -344,9 +344,11 @@ textarea {
 }
 
 .brand-logo {
-  height: 46px;
+  height: 24px;
   width: auto;
+  max-width: 100%;
   object-fit: contain;
+  display: block;
 }
 
 .primary-nav {
@@ -1604,9 +1606,10 @@ textarea.form-control {
 }
 
 .footer-brand-plate img {
-  height: 30px;
+  height: 26px;
   width: auto;
   object-fit: contain;
+  display: block;
 }
 
 .footer-desc {
