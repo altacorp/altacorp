@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://altacorp.com.br/sitemap.xml

@@ -1,23 +1,23 @@
 <!doctype html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ALTACORP | Infraestrutura de TI, Redes, Servidores e Segurança Corporativa</title>
+    <title>Altacorp Infraestrutura</title>
     <meta
       name="description"
       content="Projetamos, implementamos e administramos ambientes de TI para pequenas e médias empresas que precisam de estabilidade, segurança e continuidade operacional."
     />
     <meta
       name="keywords"
-      content="infraestrutura de TI, redes corporativas, servidores, virtualização, Proxmox VE, firewall, OPNsense, pfSense, Fortinet, backup corporativo, monitoramento Zabbix, administração de TI"
+      content="infraestrutura de TI, redes corporativas, servidores, virtualização, Proxmox VE, firewall, OPNsense, backup corporativo, monitoramento Zabbix, administração de TI"
     />
     <meta name="author" content="ALTACORP" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#0B1728" />
 
     <link rel="canonical" href="https://altacorp.com.br/" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -32,6 +32,7 @@
       property="og:description"
       content="Projetamos, implementamos e administramos ambientes de TI para empresas que precisam de estabilidade, segurança e continuidade operacional."
     />
+    <meta property="og:image" content="https://altacorp.com.br/assets/images/hero-datacenter.jpg" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -44,21 +45,27 @@
       content="Administração e engenharia de infraestrutura de TI, redes, virtualização, firewall e continuidade operacional para PMEs."
     />
 
-    <!-- Google Fonts: Spline Sans & IBM Plex Sans -->
+    <!-- Google Fonts: Poppins (títulos) + Inter (textos), combinação usada na referência -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Spline+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Structured Data (Schema.org) -->
+    <!-- Folhas de Estilo (Caminhos relativos compatíveis com GitHub Pages) -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+
+    <!-- Dados Estruturados Schema.org -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
         "name": "ALTACORP",
         "url": "https://altacorp.com.br",
+        "logo": "https://altacorp.com.br/assets/images/Logo.png",
         "description": "Empresa especializada em infraestrutura de TI, redes corporativas, servidores, virtualização, segurança da informação, backup, monitoramento e administração de ambientes tecnológicos para pequenas e médias empresas.",
         "areaServed": "BR",
         "serviceType": [
@@ -71,29 +78,1184 @@
         ]
       }
     </script>
-
-    <!-- GitHub Pages SPA Redirect Restore -->
-    <script>
-      (function (l) {
-        if (l.search[1] === '/') {
-          var decoded = l.search
-            .slice(1)
-            .split('&')
-            .map(function (s) {
-              return s.replace(/~and~/g, '&');
-            })
-            .join('?');
-          window.history.replaceState(
-            null,
-            null,
-            l.pathname.slice(0, -1) + decoded + l.hash
-          );
-        }
-      })(window.location);
-    </script>
   </head>
-  <body class="bg-white text-[#0B1728] antialiased selection:bg-[#0868D7] selection:text-white">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body>
+    <a class="skip-link" href="#conteudo-principal">Ir para o conteúdo principal</a>
+
+    <!-- ==================================================================
+         4.1 HEADER / NAVEGAÇÃO
+         ================================================================== -->
+    <header id="site-header" class="site-header">
+      <div class="container header-inner">
+        <a href="#inicio" class="brand-link" aria-label="ALTACORP — Página inicial">
+          <img
+            src="assets/images/Logo.png"
+            alt="ALTACORP"
+            width="168"
+            height="56"
+            class="brand-logo"
+          />
+        </a>
+
+        <nav class="primary-nav" aria-label="Navegação principal">
+          <a href="#inicio">Início</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#solucoes">Soluções</a>
+          <a href="#tecnologias">Tecnologias</a>
+          <a href="#sobre">Sobre nós</a>
+          <a href="#contato">Contato</a>
+        </nav>
+
+        <div class="header-actions">
+          <a href="#contato" class="btn btn--primary btn--sm header-cta-desktop">
+            <span>Solicitar avaliação</span>
+          </a>
+
+          <button
+            id="nav-toggle"
+            type="button"
+            class="nav-toggle"
+            aria-expanded="false"
+            aria-controls="mobile-drawer"
+            aria-label="Abrir menu de navegação"
+          >
+            <svg data-icon-open viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+            <svg data-icon-close class="is-hidden" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-drawer" class="mobile-drawer">
+        <nav class="container mobile-nav" aria-label="Navegação mobile">
+          <a href="#inicio">Início <span aria-hidden="true">→</span></a>
+          <a href="#servicos">Serviços <span aria-hidden="true">→</span></a>
+          <a href="#solucoes">Soluções <span aria-hidden="true">→</span></a>
+          <a href="#tecnologias">Tecnologias <span aria-hidden="true">→</span></a>
+          <a href="#sobre">Sobre nós <span aria-hidden="true">→</span></a>
+          <a href="#contato">Contato <span aria-hidden="true">→</span></a>
+          <a href="#contato" class="btn btn--primary mobile-nav__cta">Solicitar avaliação</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="conteudo-principal">
+      <!-- ================================================================
+           4.2 HERO SECTION (Layout estilo Grafana com Workbench Interativo)
+           ================================================================ -->
+      <section id="inicio" class="hero">
+        <div class="container">
+          <div class="hero-header">
+            <h1 class="hero-title">
+              Soluções em Tecnologia
+            </h1>
+            <p class="hero-subtitle">
+              Projetamos, implementamos e administramos ambientes de TI para pequenas e médias empresas que precisam
+              de estabilidade, segurança e continuidade operacional.
+            </p>
+            <div class="hero-actions">
+              <a href="#contato" class="btn btn--primary">
+                <span>Solicitar uma avaliação</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a href="#servicos" class="btn btn--outline">
+                <span>Conhecer nossos serviços</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Carrossel contínuo de tecnologias (direita → esquerda) -->
+          <div class="tech-marquee" aria-label="Tecnologias operadas pela ALTACORP">
+            <div class="tech-marquee__track">
+              <ul class="tech-marquee__group">
+                <li class="tech-marquee__item"><img src="assets/logos/proxmox.svg" alt="" width="24" height="24" /><span>Proxmox VE</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/opnsense.svg" alt="" width="24" height="24" /><span>OPNsense</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/linux.svg" alt="" width="24" height="24" /><span>Linux</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/windows-server.svg" alt="" width="24" height="24" /><span>Windows Server</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/unifi.svg" alt="" width="24" height="24" /><span>UniFi</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/wireguard.svg" alt="" width="24" height="24" /><span>WireGuard</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/tailscale.svg" alt="" width="24" height="24" /><span>Tailscale</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/zabbix.svg" alt="" width="24" height="24" /><span>Zabbix</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/qnap.svg" alt="" width="24" height="24" /><span>QNAP</span></li>
+              </ul>
+              <ul class="tech-marquee__group" aria-hidden="true">
+                <li class="tech-marquee__item"><img src="assets/logos/proxmox.svg" alt="" width="24" height="24" /><span>Proxmox VE</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/opnsense.svg" alt="" width="24" height="24" /><span>OPNsense</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/linux.svg" alt="" width="24" height="24" /><span>Linux</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/windows-server.svg" alt="" width="24" height="24" /><span>Windows Server</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/unifi.svg" alt="" width="24" height="24" /><span>UniFi</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/wireguard.svg" alt="" width="24" height="24" /><span>WireGuard</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/tailscale.svg" alt="" width="24" height="24" /><span>Tailscale</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/zabbix.svg" alt="" width="24" height="24" /><span>Zabbix</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/qnap.svg" alt="" width="24" height="24" /><span>QNAP</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           4.2.1 VITRINE DE SOLUÇÕES (Estilo Editorial Grafana — Minimalista)
+           ================================================================ -->
+      <section class="hero-showcase" aria-label="Frentes fundamentais de infraestrutura tecnológica">
+        <div class="container">
+          <div class="feature-rows-list">
+            <!-- Item 1: Servidores & Virtualização -->
+            <article class="feature-row" data-reveal>
+              <div class="feature-content">
+                <div class="feature-badge" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2" />
+                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2" />
+                    <line x1="6" y1="6" x2="6.01" y2="6" />
+                    <line x1="6" y1="18" x2="6.01" y2="18" />
+                  </svg>
+                </div>
+                <h2 class="feature-title">Servidores &amp; Virtualização</h2>
+                <p class="feature-desc">
+                  Projetamos e administramos clusters com <a href="#tecnologias" class="feature-highlight">Proxmox VE</a>, além de ambientes <a href="#tecnologias" class="feature-highlight">Linux</a> e <a href="#tecnologias" class="feature-highlight">Windows Server</a>. Consolidação de cargas de trabalho, alta disponibilidade e documentação técnica completa para sua operação.
+                </p>
+                <a href="#servicos" class="feature-link" data-service-select="servidores">
+                  <span>Conhecer soluções em servidores</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+              <div class="feature-frame">
+                <div class="feature-frame__inner">
+                  <div class="feature-frame__topbar">
+                    <span class="feature-frame__dot"></span>
+                    <span class="feature-frame__dot"></span>
+                    <span class="feature-frame__dot"></span>
+                    <span class="feature-frame__tag">altacorp · cluster-pve-01</span>
+                  </div>
+                  <img
+                    src="assets/images/hero-datacenter.jpg"
+                    alt="Corredor de servidores corporativos em ambiente de data center estruturado"
+                    width="1280"
+                    height="720"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </article>
+
+            <!-- Item 2: Redes & Segurança (Imagem à esquerda, Texto à direita) -->
+            <article class="feature-row feature-row--reverse" data-reveal>
+              <div class="feature-content">
+                <div class="feature-badge" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                </div>
+                <h2 class="feature-title">Redes &amp; Segurança</h2>
+                <p class="feature-desc">
+                  Estruturação de redes locais de alto desempenho com <a href="#tecnologias" class="feature-highlight">VLANs</a>, Wi-Fi empresarial gerenciado <a href="#tecnologias" class="feature-highlight">UniFi</a> e firewalls de borda <a href="#tecnologias" class="feature-highlight">OPNsense</a>. Conectividade remota segura via <a href="#tecnologias" class="feature-highlight">WireGuard</a>.
+                </p>
+                <a href="#servicos" class="feature-link" data-service-select="redes">
+                  <span>Conhecer engenharia de redes e segurança</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+              <div class="feature-frame">
+                <div class="feature-frame__inner">
+                  <div class="feature-frame__topbar">
+                    <span class="feature-frame__dot"></span>
+                    <span class="feature-frame__dot"></span>
+                    <span class="feature-frame__dot"></span>
+                    <span class="feature-frame__tag">altacorp · firewall-gateway</span>
+                  </div>
+                  <img
+                    src="assets/images/network-rack.jpg"
+                    alt="Cabeamento estruturado e switches gerenciáveis em rack de rede corporativa"
+                    width="960"
+                    height="720"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </article>
+
+            <!-- Item 3: Monitoramento & Continuidade -->
+            <article class="feature-row" data-reveal>
+              <div class="feature-content">
+                <div class="feature-badge" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                  </svg>
+                </div>
+                <h2 class="feature-title">Monitoramento &amp; Continuidade</h2>
+                <p class="feature-desc">
+                  Observabilidade contínua de servidores, links e serviços críticos com <a href="#tecnologias" class="feature-highlight">Zabbix</a>. Rotinas automatizadas de backup corporativo local e em nuvem com storage <a href="#tecnologias" class="feature-highlight">QNAP</a>, garantindo retenção segura e restauração imediata em incidentes.
+                </p>
+                <a href="#servicos" class="feature-link" data-service-select="monitoramento">
+                  <span>Conhecer observabilidade e backup</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+              <div class="feature-frame">
+                <div class="feature-frame__inner">
+                  <div class="feature-frame__topbar">
+                    <span class="feature-frame__dot"></span>
+                    <span class="feature-frame__dot"></span>
+                    <span class="feature-frame__dot"></span>
+                    <span class="feature-frame__tag">altacorp · zabbix-monitor</span>
+                  </div>
+                  <img
+                    src="assets/images/infra-operations.jpg"
+                    alt="Estação de engenharia e monitoramento técnico com vista para sala de servidores corporativa"
+                    width="1200"
+                    height="900"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Faixa horizontal de ecossistema tecnológico -->
+      <div class="ecosystem-strip" aria-label="Tecnologias operadas pela ALTACORP">
+        <div class="container ecosystem-strip__inner">
+          <p class="ecosystem-strip__label">
+            Plataformas e tecnologias consolidadas operadas pela ALTACORP
+          </p>
+          <div class="ecosystem-logos">
+            <span class="ecosystem-logo-item">
+              <img src="assets/logos/proxmox.svg" alt="" width="20" height="20" />
+              Proxmox VE
+            </span>
+            <span class="ecosystem-logo-item">
+              <img src="assets/logos/opnsense.svg" alt="" width="20" height="20" />
+              OPNsense
+            </span>
+            <span class="ecosystem-logo-item">
+              <img src="assets/logos/linux.svg" alt="" width="20" height="20" />
+              Linux
+            </span>
+            <span class="ecosystem-logo-item">
+              <img src="assets/logos/windows-server.svg" alt="" width="20" height="20" />
+              Windows Server
+            </span>
+            <span class="ecosystem-logo-item">
+              <img src="assets/logos/unifi.svg" alt="" width="20" height="20" />
+              UniFi
+            </span>
+            <span class="ecosystem-logo-item">
+              <img src="assets/logos/wireguard.svg" alt="" width="20" height="20" />
+              WireGuard
+            </span>
+            <span class="ecosystem-logo-item">
+              <img src="assets/logos/tailscale.svg" alt="" width="20" height="20" />
+              Tailscale
+            </span>
+            <span class="ecosystem-logo-item">
+              <img src="assets/logos/zabbix.svg" alt="" width="20" height="20" />
+              Zabbix
+            </span>
+            <span class="ecosystem-logo-item">
+              <img src="assets/logos/qnap.svg" alt="" width="20" height="20" />
+              QNAP
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           4.3 APRESENTAÇÃO INSTITUCIONAL
+           ================================================================ -->
+      <section class="section section--white">
+        <div class="container">
+          <div class="intro-split" data-reveal>
+            <div>
+              <span class="eyebrow">Posicionamento institucional</span>
+              <h2 class="section-title">Tecnologia que sustenta a operação do seu negócio.</h2>
+            </div>
+
+            <div class="intro-copy">
+              <p class="intro-copy__lead">
+                A ALTACORP atua na administração e evolução de ambientes tecnológicos corporativos,
+                oferecendo soluções de infraestrutura, redes, servidores e segurança da informação.
+              </p>
+              <p class="intro-copy__muted">
+                Nosso trabalho é garantir que a tecnologia funcione de maneira eficiente, segura e
+                alinhada às necessidades de cada empresa.
+              </p>
+            </div>
+          </div>
+
+          <div class="pillars-grid" data-reveal>
+            <article class="pillar-card">
+              <span class="pillar-card__num">01 / OPERAÇÃO</span>
+              <h3 class="pillar-card__title">Confiabilidade operacional.</h3>
+              <p class="pillar-card__desc">
+                Ambientes planejados para manter sistemas, conectividade e rotinas críticas em
+                operação contínua, com previsibilidade e menor exposição a falhas.
+              </p>
+            </article>
+
+            <article class="pillar-card">
+              <span class="pillar-card__num">02 / PROTEÇÃO</span>
+              <h3 class="pillar-card__title">Segurança e proteção.</h3>
+              <p class="pillar-card__desc">
+                Controle rigoroso de perímetro, segmentação de rede, políticas de acesso e rotinas
+                estruturadas de backup para proteger os ativos da empresa.
+              </p>
+            </article>
+
+            <article class="pillar-card">
+              <span class="pillar-card__num">03 / ARQUITETURA</span>
+              <h3 class="pillar-card__title">Eficiência tecnológica.</h3>
+              <p class="pillar-card__desc">
+                Arquitetura dimensionada à realidade do negócio, combinando plataformas consolidadas
+                e open-source sem excessos ou dependências desnecessárias.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           4.4 SERVIÇOS ESPECIALIZADOS (Composição Bento Modular)
+           ================================================================ -->
+      <section id="servicos" class="section section--light">
+        <div class="container">
+          <div class="section-heading-center" data-reveal>
+            <span class="eyebrow">Serviços especializados</span>
+            <h2 class="section-title">
+              Engenharia aplicada à <span class="title-accent">continuidade</span> da infraestrutura.
+            </h2>
+            <p class="section-subtitle">
+              Atuação técnica completa desde o desenho da topologia até a administração preventiva
+              e documentação do ambiente corporativo.
+            </p>
+          </div>
+
+          <div class="services-bento">
+            <!-- 1. Infraestrutura de Redes (Destaque escuro - 7 colunas) -->
+            <article class="service-card service-card--featured-dark" data-reveal>
+              <div>
+                <div class="service-card__top">
+                  <span class="service-card__badge">SRV-01</span>
+                  <span class="service-card__tag">Conectividade &amp; Topologia</span>
+                </div>
+                <h3 class="service-card__title">Infraestrutura de Redes</h3>
+                <p class="service-card__desc">
+                  Planejamento, implantação e administração de redes corporativas, conectividade,
+                  segmentação, VLANs, Wi-Fi empresarial e VPN.
+                </p>
+                <ul class="service-bullets">
+                  <li>Arquitetura de switching e roteamento corporativo</li>
+                  <li>Segmentação por VLANs e isolamento de tráfego</li>
+                  <li>Redes sem fio empresariais e interligação via VPN</li>
+                </ul>
+              </div>
+              <div class="service-card__footer">
+                <button
+                  type="button"
+                  class="service-action-btn"
+                  data-select-service="Infraestrutura de Redes"
+                >
+                  <span>Solicitar avaliação em Infraestrutura de Redes</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- 2. Servidores e Virtualização (Destaque claro - 5 colunas) -->
+            <article class="service-card service-card--featured-light" data-reveal>
+              <div>
+                <div class="service-card__top">
+                  <span class="service-card__badge">SRV-02</span>
+                  <span class="service-card__tag">Compute &amp; Hypervisor</span>
+                </div>
+                <h3 class="service-card__title">Servidores e Virtualização</h3>
+                <p class="service-card__desc">
+                  Implantação e administração de ambientes Windows Server, Linux, Proxmox VE,
+                  máquinas virtuais e serviços corporativos.
+                </p>
+                <ul class="service-bullets">
+                  <li>Consolidação de cargas em hipervisores Proxmox VE</li>
+                  <li>Administração de servidores Linux e Windows Server</li>
+                  <li>Organização de serviços de diretório, arquivos e aplicações</li>
+                </ul>
+              </div>
+              <div class="service-card__footer">
+                <button
+                  type="button"
+                  class="service-action-btn"
+                  data-select-service="Servidores e Virtualização"
+                >
+                  <span>Avaliar ambiente de servidores</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- 3. Firewall e Segurança (5 colunas) -->
+            <article class="service-card service-card--col-5" data-reveal>
+              <div>
+                <div class="service-card__top">
+                  <span class="service-card__badge">SRV-03</span>
+                  <span class="service-card__tag">Perímetro &amp; Acesso</span>
+                </div>
+                <h3 class="service-card__title">Firewall e Segurança</h3>
+                <p class="service-card__desc">
+                  Implementação e administração de firewalls, políticas de acesso, VPNs, segmentação
+                  de redes e proteção da infraestrutura.
+                </p>
+              </div>
+              <div class="service-card__footer">
+                <button
+                  type="button"
+                  class="service-action-btn"
+                  data-select-service="Firewall e Segurança"
+                >
+                  <span>Consultar escopo</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- 4. Backup e Recuperação (3 colunas) -->
+            <article class="service-card service-card--col-3" data-reveal>
+              <div>
+                <div class="service-card__top">
+                  <span class="service-card__badge">SRV-04</span>
+                </div>
+                <h3 class="service-card__title">Backup e Recuperação</h3>
+                <p class="service-card__desc">
+                  Estratégias de backup, armazenamento, retenção, monitoramento e recuperação de
+                  dados.
+                </p>
+              </div>
+              <div class="service-card__footer">
+                <button
+                  type="button"
+                  class="service-action-btn"
+                  data-select-service="Backup e Recuperação"
+                >
+                  <span>Consultar escopo</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- 5. Monitoramento e Disponibilidade (4 colunas) -->
+            <article class="service-card service-card--col-4" data-reveal>
+              <div>
+                <div class="service-card__top">
+                  <span class="service-card__badge">SRV-05</span>
+                  <span class="service-card__tag">Observabilidade</span>
+                </div>
+                <h3 class="service-card__title">Monitoramento e Disponibilidade</h3>
+                <p class="service-card__desc">
+                  Monitoramento de servidores, redes, serviços e recursos de infraestrutura.
+                </p>
+              </div>
+              <div class="service-card__footer">
+                <button
+                  type="button"
+                  class="service-action-btn"
+                  data-select-service="Monitoramento e Disponibilidade"
+                >
+                  <span>Consultar escopo</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- 6. Administração de TI (Faixa horizontal - 12 colunas) -->
+            <article class="service-card service-card--full" data-reveal>
+              <div class="service-full-layout">
+                <div class="service-full-info">
+                  <div class="service-card__top" style="justify-content: flex-start">
+                    <span class="service-card__badge">SRV-06</span>
+                    <span class="service-card__tag">Gestão Contínua</span>
+                  </div>
+                  <h3 class="service-card__title">Administração de TI</h3>
+                  <p class="service-card__desc">
+                    Gestão técnica da infraestrutura, manutenção preventiva, documentação,
+                    atualização e acompanhamento dos ambientes tecnológicos.
+                  </p>
+                </div>
+
+                <div class="service-full-side">
+                  <ul class="service-bullets">
+                    <li>Documentação técnica atualizada do ambiente</li>
+                    <li>Rotinas preventivas, atualizações e evolução planejada</li>
+                  </ul>
+                  <button
+                    type="button"
+                    class="btn btn--navy"
+                    data-select-service="Administração de TI"
+                  >
+                    <span>Falar sobre gestão</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M5 12h14M13 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           4.5 TECNOLOGIAS E PLATAFORMAS (Com filtro interativo por categoria)
+           ================================================================ -->
+      <section id="tecnologias" class="section section--white">
+        <div class="container">
+          <div class="section-heading-center" data-reveal>
+            <span class="eyebrow">Tecnologias e plataformas</span>
+            <h2 class="section-title">Stack técnico consolidado em ambientes corporativos.</h2>
+            <p class="section-subtitle">
+              Selecionamos plataformas maduras e reconhecidas pela estabilidade em produção,
+              conforme os requisitos de cada projeto.
+            </p>
+          </div>
+
+          <div class="tech-filter-bar" role="group" aria-label="Filtrar tecnologias por categoria">
+            <button type="button" class="tech-filter-btn is-active" data-tech-filter="all" aria-pressed="true">
+              Todas as categorias
+            </button>
+            <button type="button" class="tech-filter-btn" data-tech-filter="virtualizacao" aria-pressed="false">
+              Virtualização
+            </button>
+            <button type="button" class="tech-filter-btn" data-tech-filter="firewall" aria-pressed="false">
+              Firewall e Segurança
+            </button>
+            <button type="button" class="tech-filter-btn" data-tech-filter="so" aria-pressed="false">
+              Sistemas operacionais
+            </button>
+            <button type="button" class="tech-filter-btn" data-tech-filter="redes" aria-pressed="false">
+              Redes e conectividade
+            </button>
+            <button type="button" class="tech-filter-btn" data-tech-filter="monitoramento" aria-pressed="false">
+              Monitoramento
+            </button>
+            <button type="button" class="tech-filter-btn" data-tech-filter="backup" aria-pressed="false">
+              Backup e armazenamento
+            </button>
+          </div>
+
+          <div class="tech-grid" data-reveal>
+            <article class="tech-card" data-tech-category="virtualizacao">
+              <div class="tech-card__header">
+                <h3 class="tech-card__title">Virtualização</h3>
+                <span class="tech-card__code">01</span>
+              </div>
+              <ul class="tech-items">
+                <li class="tech-row">
+                  <div class="tech-icon-wrap">
+                    <img src="assets/logos/proxmox.svg" alt="Logotipo Proxmox VE" width="22" height="22" loading="lazy" />
+                  </div>
+                  <div><span class="tech-row__name">Proxmox VE</span></div>
+                </li>
+              </ul>
+            </article>
+
+            <article class="tech-card" data-tech-category="firewall">
+              <div class="tech-card__header">
+                <h3 class="tech-card__title">Firewall e Segurança</h3>
+                <span class="tech-card__code">02</span>
+              </div>
+              <ul class="tech-items">
+                <li class="tech-row">
+                  <div class="tech-icon-wrap">
+                    <img src="assets/logos/opnsense.svg" alt="Logotipo OPNsense" width="22" height="22" loading="lazy" />
+                  </div>
+                  <div><span class="tech-row__name">OPNsense</span></div>
+                </li>
+              </ul>
+            </article>
+
+            <article class="tech-card" data-tech-category="so">
+              <div class="tech-card__header">
+                <h3 class="tech-card__title">Sistemas operacionais</h3>
+                <span class="tech-card__code">03</span>
+              </div>
+              <ul class="tech-items">
+                <li class="tech-row">
+                  <div class="tech-icon-wrap">
+                    <img src="assets/logos/linux.svg" alt="Logotipo Linux" width="22" height="22" loading="lazy" />
+                  </div>
+                  <div><span class="tech-row__name">Linux</span></div>
+                </li>
+                <li class="tech-row">
+                  <div class="tech-icon-wrap">
+                    <img src="assets/logos/windows-server.svg" alt="Logotipo Windows Server" width="22" height="22" loading="lazy" />
+                  </div>
+                  <div><span class="tech-row__name">Windows Server</span></div>
+                </li>
+              </ul>
+            </article>
+
+            <article class="tech-card" data-tech-category="redes">
+              <div class="tech-card__header">
+                <h3 class="tech-card__title">Redes e conectividade</h3>
+                <span class="tech-card__code">04</span>
+              </div>
+              <ul class="tech-items">
+                <li class="tech-row">
+                  <div class="tech-icon-wrap">
+                    <img src="assets/logos/unifi.svg" alt="Logotipo UniFi" width="22" height="22" loading="lazy" />
+                  </div>
+                  <div><span class="tech-row__name">UniFi</span></div>
+                </li>
+                <li class="tech-row">
+                  <div class="tech-icon-wrap">
+                    <img src="assets/logos/wireguard.svg" alt="Logotipo WireGuard" width="22" height="22" loading="lazy" />
+                  </div>
+                  <div><span class="tech-row__name">WireGuard</span></div>
+                </li>
+                <li class="tech-row">
+                  <div class="tech-icon-wrap">
+                    <img src="assets/logos/tailscale.svg" alt="Logotipo Tailscale" width="22" height="22" loading="lazy" />
+                  </div>
+                  <div><span class="tech-row__name">Tailscale</span></div>
+                </li>
+              </ul>
+            </article>
+
+            <article class="tech-card" data-tech-category="monitoramento">
+              <div class="tech-card__header">
+                <h3 class="tech-card__title">Monitoramento</h3>
+                <span class="tech-card__code">05</span>
+              </div>
+              <ul class="tech-items">
+                <li class="tech-row">
+                  <div class="tech-icon-wrap">
+                    <img src="assets/logos/zabbix.svg" alt="Logotipo Zabbix" width="22" height="22" loading="lazy" />
+                  </div>
+                  <div><span class="tech-row__name">Zabbix</span></div>
+                </li>
+              </ul>
+            </article>
+
+            <article class="tech-card" data-tech-category="backup">
+              <div class="tech-card__header">
+                <h3 class="tech-card__title">Backup e armazenamento</h3>
+                <span class="tech-card__code">06</span>
+              </div>
+              <ul class="tech-items">
+                <li class="tech-row">
+                  <div class="tech-icon-wrap">
+                    <img src="assets/logos/qnap.svg" alt="Logotipo QNAP" width="22" height="22" loading="lazy" />
+                  </div>
+                  <div><span class="tech-row__name">QNAP</span></div>
+                </li>
+                <li class="tech-row">
+                  <div class="tech-icon-wrap">
+                    <img src="assets/icons/backup-storage.svg" alt="" width="22" height="22" loading="lazy" />
+                  </div>
+                  <div>
+                    <span class="tech-row__name">Soluções de backup e armazenamento corporativo</span>
+                    <span class="tech-row__note">Arquiteturas dedicadas de retenção e recuperação</span>
+                  </div>
+                </li>
+              </ul>
+            </article>
+          </div>
+
+          <p class="tech-disclaimer">
+            As marcas e logotipos exibidos pertencem aos seus respectivos proprietários e ilustram
+            plataformas operadas tecnicamente pela ALTACORP na implantação e administração de
+            ambientes, sem implicar parceria comercial, representação oficial ou certificação
+            inexistente.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           4.6 OPEN SOURCE E INDEPENDÊNCIA TECNOLÓGICA
+           ================================================================ -->
+      <section id="solucoes" class="section section--dark ambient-glow">
+        <div class="container opensource-layout" data-reveal>
+          <div>
+            <span class="eyebrow eyebrow--pill">Open Source e independência tecnológica</span>
+            <h2 class="section-title">
+              Mais liberdade tecnológica.
+              <span class="title-accent">Mais controle sobre sua infraestrutura.</span>
+            </h2>
+
+            <div class="opensource-copy">
+              <p>
+                Acreditamos que empresas devem ter liberdade para escolher as tecnologias que melhor
+                atendem às suas necessidades.
+              </p>
+              <p>
+                Trabalhamos com soluções open-source e plataformas consolidadas para desenvolver
+                ambientes tecnológicos eficientes, flexíveis e economicamente sustentáveis.
+              </p>
+              <p class="opensource-copy__strong">
+                Nossa abordagem prioriza autonomia, transparência e independência tecnológica.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <div class="benefits-grid">
+              <article class="benefit-card">
+                <span class="benefit-card__num">01</span>
+                <h3 class="benefit-card__title">
+                  Menor dependência de licenciamento proprietário.
+                </h3>
+                <p class="benefit-card__desc">
+                  Avaliação racional entre plataformas abertas e proprietárias, reduzindo amarras
+                  contratuais onde soluções open-source entregam robustez técnica.
+                </p>
+              </article>
+
+              <article class="benefit-card">
+                <span class="benefit-card__num">02</span>
+                <h3 class="benefit-card__title">Flexibilidade na arquitetura tecnológica.</h3>
+                <p class="benefit-card__desc">
+                  Liberdade para compor, integrar e evoluir servidores, firewalls e ferramentas de
+                  monitoramento conforme as exigências reais da operação.
+                </p>
+              </article>
+
+              <article class="benefit-card">
+                <span class="benefit-card__num">03</span>
+                <h3 class="benefit-card__title">Maior controle sobre os ambientes.</h3>
+                <p class="benefit-card__desc">
+                  Visibilidade transparente sobre configurações, topologia, acessos e dados, sem
+                  caixas-pretas operacionais.
+                </p>
+              </article>
+
+              <article class="benefit-card">
+                <span class="benefit-card__num">04</span>
+                <h3 class="benefit-card__title">Soluções adaptadas à realidade de cada empresa.</h3>
+                <p class="benefit-card__desc">
+                  Dimensionamento técnico sob medida para pequenas e médias empresas, respeitando
+                  orçamento, equipe e criticidade de cada serviço.
+                </p>
+              </article>
+            </div>
+
+            <p class="opensource-note">
+              Nota técnica: a adoção de software open-source prioriza autonomia arquitetural e não
+              elimina custos de implantação, hardware, manutenção especializada ou eventuais
+              licenciamentos proprietários exigidos por sistemas específicos.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           4.7 METODOLOGIA DE TRABALHO
+           ================================================================ -->
+      <section class="section section--light">
+        <div class="container">
+          <div class="section-heading-center" data-reveal>
+            <span class="eyebrow">Metodologia de trabalho</span>
+            <h2 class="section-title">
+              Um processo estruturado da análise inicial à administração contínua.
+            </h2>
+          </div>
+
+          <div class="methodology-steps" data-reveal>
+            <article class="method-card">
+              <div>
+                <span class="method-card__step">01</span>
+                <h3 class="method-card__title">01 — Diagnóstico</h3>
+                <p class="method-card__desc">
+                  Levantamento técnico do ambiente atual, topologia, pontos críticos e demandas
+                  operacionais da empresa.
+                </p>
+              </div>
+            </article>
+
+            <article class="method-card">
+              <div>
+                <span class="method-card__step">02</span>
+                <h3 class="method-card__title">02 — Planejamento</h3>
+                <p class="method-card__desc">
+                  Definição de arquitetura, seleção de plataformas, prioridades de segurança e
+                  cronograma de implantação.
+                </p>
+              </div>
+            </article>
+
+            <article class="method-card">
+              <div>
+                <span class="method-card__step">03</span>
+                <h3 class="method-card__title">03 — Implementação</h3>
+                <p class="method-card__desc">
+                  Execução controlada das configurações, migrações, políticas de acesso, backup e
+                  documentação técnica.
+                </p>
+              </div>
+            </article>
+
+            <article class="method-card">
+              <div>
+                <span class="method-card__step">04</span>
+                <h3 class="method-card__title">04 — Administração contínua</h3>
+                <p class="method-card__desc">
+                  Monitoramento, manutenção preventiva, atualizações e acompanhamento permanente
+                  para sustentar o crescimento.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           4.8 SOBRE A ALTACORP
+           ================================================================ -->
+      <section id="sobre" class="section section--white">
+        <div class="container about-grid" data-reveal>
+          <div class="about-media">
+            <div class="about-frame">
+              <img
+                src="assets/images/infra-operations.jpg"
+                alt="Estação de engenharia e monitoramento técnico com vista para sala de servidores corporativa"
+                width="1200"
+                height="900"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <div class="about-content">
+            <span class="eyebrow">Sobre a ALTACORP</span>
+            <h2 class="section-title">
+              Infraestrutura bem administrada começa com decisões técnicas bem fundamentadas.
+            </h2>
+
+            <div class="about-text">
+              <p>
+                A ALTACORP é especializada em infraestrutura de TI para pequenas e médias empresas
+                que precisam de ambientes organizados, previsíveis e seguros para sustentar suas
+                operações diárias.
+              </p>
+              <p>
+                Atuamos com critério técnico na escolha de arquiteturas, clareza na documentação e
+                acompanhamento responsável, assumindo a engenharia e a manutenção contínua do
+                ambiente sem soluções improvisadas.
+              </p>
+            </div>
+
+            <div class="about-principles">
+              <span class="principle-pill">Conhecimento técnico</span>
+              <span class="principle-pill">Planejamento</span>
+              <span class="principle-pill">Transparência</span>
+              <span class="principle-pill">Segurança</span>
+              <span class="principle-pill">Soluções adequadas ao negócio</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           4.9 CTA COMERCIAL
+           ================================================================ -->
+      <section class="section section--dark ambient-glow cta-band">
+        <div class="container cta-band__inner" data-reveal>
+          <span class="eyebrow eyebrow--pill">Avaliação técnica</span>
+          <h2 class="section-title">
+            Sua infraestrutura está preparada para acompanhar o crescimento da sua empresa?
+          </h2>
+          <p class="cta-band__text">
+            Converse com a ALTACORP e descubra como podemos melhorar a segurança, a estabilidade e a
+            eficiência do seu ambiente tecnológico.
+          </p>
+          <a href="#contato" class="btn btn--primary">
+            <span>Solicitar avaliação técnica</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           6. CONTATO E FORMULÁRIO COMERCIAL
+           ================================================================ -->
+      <section id="contato" class="section section--light">
+        <div class="container contact-grid">
+          <div data-reveal>
+            <span class="eyebrow">Contato comercial</span>
+            <h2 class="section-title">Solicite uma avaliação técnica do seu ambiente.</h2>
+            <p class="contact-lead">
+              Compartilhe informações iniciais sobre a sua infraestrutura para direcionarmos o
+              atendimento com objetividade técnica.
+            </p>
+
+            <div class="contact-channels">
+              <div class="contact-channel-item">
+                <span class="contact-channel-item__label">Atendimento via WhatsApp</span>
+
+                <a
+                  id="contact-whatsapp-btn"
+                  href="#contato"
+                  class="btn btn--navy is-hidden"
+                  style="width: 100%"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                  <span data-wa-label>Conversar pelo WhatsApp</span>
+                </a>
+
+                <div id="contact-whatsapp-placeholder" class="contact-channel-placeholder">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0868D7" stroke-width="2" aria-hidden="true">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                  <span>WhatsApp comercial configurável em <code>js/config.js</code>.</span>
+                </div>
+              </div>
+
+              <div class="contact-channel-item">
+                <span class="contact-channel-item__label">E-mail comercial</span>
+                <div data-contact-email>
+                  <div class="contact-channel-placeholder">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0868D7" stroke-width="2" aria-hidden="true">
+                      <rect x="2" y="4" width="20" height="16" rx="2" />
+                      <path d="M22 7l-10 6L2 7" />
+                    </svg>
+                    <span>E-mail comercial configurável em <code>js/config.js</code>.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="contact-channel-item">
+                <span class="contact-channel-item__label">Domínio oficial</span>
+                <p class="contact-domain">altacorp.com.br</p>
+              </div>
+            </div>
+          </div>
+
+          <div data-reveal>
+            <form id="contact-form" class="contact-form" novalidate>
+              <div class="contact-form__head">
+                <h3 class="contact-form__title">Formulário de solicitação</h3>
+                <span class="contact-form__req">* Campos obrigatórios</span>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-field">
+                  <label class="form-label" for="contact-name">Nome *</label>
+                  <input
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    class="form-control"
+                    autocomplete="name"
+                    required
+                    minlength="2"
+                    placeholder="Seu nome completo"
+                    aria-describedby="error-name"
+                  />
+                  <p id="error-name" class="field-error" aria-live="polite"></p>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="contact-company">Empresa *</label>
+                  <input
+                    id="contact-company"
+                    name="company"
+                    type="text"
+                    class="form-control"
+                    autocomplete="organization"
+                    required
+                    placeholder="Razão social ou nome fantasia"
+                    aria-describedby="error-company"
+                  />
+                  <p id="error-company" class="field-error" aria-live="polite"></p>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-field">
+                  <label class="form-label" for="contact-email">E-mail *</label>
+                  <input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    class="form-control"
+                    autocomplete="email"
+                    required
+                    placeholder="nome@empresa.com.br"
+                    aria-describedby="error-email"
+                  />
+                  <p id="error-email" class="field-error" aria-live="polite"></p>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="contact-phone">Telefone / WhatsApp *</label>
+                  <input
+                    id="contact-phone"
+                    name="phone"
+                    type="tel"
+                    class="form-control"
+                    autocomplete="tel"
+                    required
+                    placeholder="(DDD) 00000-0000"
+                    aria-describedby="error-phone"
+                  />
+                  <p id="error-phone" class="field-error" aria-live="polite"></p>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="contact-service">Serviço de interesse *</label>
+                <select
+                  id="contact-service"
+                  name="service"
+                  class="form-control"
+                  required
+                  aria-describedby="error-service"
+                >
+                  <option value="">Selecione uma frente de atuação</option>
+                  <option value="Infraestrutura de Redes">Infraestrutura de Redes</option>
+                  <option value="Servidores e Virtualização">Servidores e Virtualização</option>
+                  <option value="Firewall e Segurança">Firewall e Segurança</option>
+                  <option value="Backup e Recuperação">Backup e Recuperação</option>
+                  <option value="Monitoramento e Disponibilidade">
+                    Monitoramento e Disponibilidade
+                  </option>
+                  <option value="Administração de TI">Administração de TI</option>
+                  <option value="Avaliação geral de infraestrutura">
+                    Avaliação geral de infraestrutura
+                  </option>
+                </select>
+                <p id="error-service" class="field-error" aria-live="polite"></p>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="contact-description">
+                  Descrição da necessidade *
+                </label>
+                <textarea
+                  id="contact-description"
+                  name="description"
+                  class="form-control"
+                  rows="4"
+                  required
+                  minlength="12"
+                  placeholder="Descreva o cenário atual (quantidade aproximada de usuários, servidores, filiais ou demandas prioritárias)."
+                  aria-describedby="error-description"
+                ></textarea>
+                <p id="error-description" class="field-error" aria-live="polite"></p>
+              </div>
+
+              <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+
+              <div class="form-submit-row">
+                <p class="form-privacy-note">
+                  Ao enviar, você concorda com nossa
+                  <a href="privacidade.html">Política de Privacidade</a>.
+                </p>
+
+                <button id="form-submit-btn" type="submit" class="btn btn--primary">
+                  <span>Enviar solicitação</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================================================================
+         4.10 FOOTER
+         ================================================================== -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-main">
+          <div>
+            <a href="#inicio" class="footer-brand-plate" aria-label="ALTACORP — Voltar ao início">
+              <img src="assets/images/Logo.png" alt="ALTACORP" width="156" height="52" />
+            </a>
+            <p class="footer-desc">
+              Empresa especializada em infraestrutura de TI, redes corporativas, servidores,
+              virtualização, segurança da informação e administração de ambientes tecnológicos para
+              pequenas e médias empresas.
+            </p>
+            <p class="footer-domain">altacorp.com.br</p>
+          </div>
+
+          <div>
+            <h3 class="footer-heading">Navegação</h3>
+            <ul class="footer-links">
+              <li><a href="#inicio">Início</a></li>
+              <li><a href="#servicos">Serviços</a></li>
+              <li><a href="#solucoes">Soluções</a></li>
+              <li><a href="#tecnologias">Tecnologias</a></li>
+              <li><a href="#sobre">Sobre nós</a></li>
+              <li><a href="#contato">Contato</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="footer-heading">Principais serviços</h3>
+            <ul class="footer-links">
+              <li><a href="#servicos">Infraestrutura de Redes</a></li>
+              <li><a href="#servicos">Servidores e Virtualização</a></li>
+              <li><a href="#servicos">Firewall e Segurança</a></li>
+              <li><a href="#servicos">Backup e Recuperação</a></li>
+              <li><a href="#servicos">Monitoramento e Disponibilidade</a></li>
+              <li><a href="#servicos">Administração de TI</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="footer-heading">Canais comerciais</h3>
+            <ul class="footer-links">
+              <li>
+                <span class="footer-contact-label">E-mail comercial</span>
+                <span class="footer-contact-value" data-footer-email>
+                  Configurável em js/config.js
+                </span>
+              </li>
+              <li>
+                <span class="footer-contact-label">WhatsApp</span>
+                <span class="footer-contact-value" data-footer-whatsapp>
+                  Configurável em js/config.js
+                </span>
+              </li>
+              <li>
+                <a href="privacidade.html" class="footer-privacy-link">Política de Privacidade</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© <span id="current-year">2026</span> ALTACORP. Todos os direitos reservados.</p>
+          <p>Infraestrutura de TI, Redes, Servidores e Segurança da Informação</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>

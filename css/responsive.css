@@ -1,0 +1,195 @@
+/* ==========================================================================
+   ALTACORP — Responsividade (Desktop, Notebook, Tablet e Mobile)
+   ========================================================================== */
+
+@media (max-width: 1120px) {
+  .primary-nav {
+    gap: 20px;
+  }
+
+  .feature-row {
+    gap: 40px;
+  }
+
+  .service-full-layout {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .service-full-side {
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-border);
+  }
+}
+
+@media (max-width: 1023px) {
+  .primary-nav,
+  .header-cta-desktop {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .hero {
+    padding-block: 56px 52px;
+  }
+
+  .feature-row,
+  .feature-row--reverse {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 100%;
+  }
+
+  .feature-row--reverse .feature-content {
+    order: 1;
+  }
+
+  .feature-row--reverse .feature-frame {
+    order: 2;
+  }
+
+  .feature-row:not(.feature-row--reverse) .feature-content,
+  .feature-content {
+    justify-self: start;
+    max-width: 100%;
+    padding-inline: 0;
+  }
+
+  .feature-frame {
+    justify-self: stretch;
+    max-width: 100%;
+    height: 260px;
+  }
+
+  .feature-rows-list {
+    gap: 96px;
+  }
+
+  .hero-showcase {
+    padding-block: 52px 88px;
+  }
+
+  .intro-split,
+  .opensource-layout,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .pillars-grid,
+  .tech-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .service-card--featured-dark,
+  .service-card--featured-light,
+  .service-card--col-5,
+  .service-card--col-3,
+  .service-card--col-4,
+  .service-card--full {
+    grid-column: span 12;
+  }
+
+  .methodology-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-media,
+  .about-content {
+    grid-column: span 12;
+  }
+
+  .about-media {
+    order: 2;
+  }
+
+  .about-content {
+    order: 1;
+  }
+
+  .footer-main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding-inline: 20px;
+  }
+
+  .section {
+    padding-block: 64px;
+  }
+
+  .section-heading-center {
+    text-align: left;
+    margin-bottom: 36px;
+  }
+
+  .hero-header {
+    text-align: left;
+  }
+
+  .hero-actions {
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .feature-frame {
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .feature-frame__inner {
+    border-radius: 12px;
+  }
+
+  .feature-frame__tag {
+    display: none;
+  }
+
+  .ecosystem-logos {
+    gap: 18px 22px;
+    justify-content: flex-start;
+  }
+
+  .pillars-grid,
+  .tech-grid,
+  .benefits-grid,
+  .methodology-steps,
+  .form-row-2,
+  .footer-main {
+    grid-template-columns: 1fr;
+  }
+
+  .tech-filter-bar {
+    justify-content: flex-start;
+  }
+
+  .service-card,
+  .service-card--featured-dark,
+  .service-card--featured-light,
+  .service-card--full,
+  .contact-form {
+    padding: 24px;
+  }
+
+  .service-full-side {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-submit-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
