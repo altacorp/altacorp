@@ -191,8 +191,54 @@
     });
   }
 
+  function initMegaMenu() {
+    var dropdownItems = document.querySelectorAll('.nav-item--has-dropdown');
+    if (!dropdownItems.length) return;
+
+    dropdownItems.forEach(function (item) {
+      var trigger = item.querySelector('.primary-nav__link');
+      var links = item.querySelectorAll('.mega-menu a');
+
+      item.addEventListener('mouseenter', function () {
+        item.classList.remove('is-closed');
+        if (trigger) trigger.setAttribute('aria-expanded', 'true');
+      });
+
+      item.addEventListener('mouseleave', function () {
+        item.classList.remove('is-closed');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
+
+      links.forEach(function (link) {
+        link.addEventListener('click', function () {
+          item.classList.add('is-closed');
+          if (trigger) trigger.setAttribute('aria-expanded', 'false');
+          if (document.activeElement && typeof document.activeElement.blur === 'function') {
+            document.activeElement.blur();
+          }
+
+          var techFilter = link.getAttribute('data-mega-tech');
+          if (techFilter) {
+            var filterBtn = document.querySelector('[data-tech-filter="' + techFilter + '"]');
+            if (filterBtn) filterBtn.click();
+          }
+        });
+      });
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        dropdownItems.forEach(function (item) {
+          item.classList.add('is-closed');
+          var trigger = item.querySelector('.primary-nav__link');
+          if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+  }
+
   function initActiveNavObserver() {
-    var navLinks = document.querySelectorAll('.primary-nav a[href^="#"]');
+    var navLinks = document.querySelectorAll('.primary-nav__link[href^="#"]');
     if (!navLinks.length || !('IntersectionObserver' in window)) return;
 
     var linkById = {};
@@ -590,10 +636,468 @@
     );
   }
 
+  function initChatWidget() {
+    var fab = document.getElementById('chat-fab');
+    var chatWindow = document.getElementById('chat-window');
+    var closeBtn = document.getElementById('chat-close');
+    var resetBtn = document.getElementById('chat-reset');
+    var messagesEl = document.getElementById('chat-messages');
+    var chatForm = document.getElementById('chat-form');
+    var chatInput = document.getElementById('chat-input');
+    var tooltip = document.getElementById('chat-tooltip');
+
+    if (!fab || !chatWindow || !messagesEl || !chatForm || !chatInput) return;
+
+    var isOpen = false;
+    var hasInitialized = false;
+
+    function nowTime() {
+      var d = new Date();
+      return (
+        String(d.getHours()).padStart(2, '0') +
+        ':' +
+        String(d.getMinutes()).padStart(2, '0')
+      );
+    }
+
+    function scrollToBottom() {
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function appendMessage(sender, text, extraNode) {
+      var wrapper = document.createElement('div');
+      wrapper.className = 'chat-msg chat-msg--' + sender;
+
+      var bubble = document.createElement('div');
+      bubble.className = 'chat-bubble';
+
+      if (text) {
+        text.split('\n').forEach(function (line) {
+          var p = document.createElement('p');
+          p.textContent = line;
+          bubble.appendChild(p);
+        });
+      }
+
+      if (extraNode) {
+        bubble.appendChild(extraNode);
+      }
+
+      var time = document.createElement('span');
+      time.className = 'chat-msg__time';
+      time.textContent = nowTime();
+
+      wrapper.appendChild(bubble);
+      wrapper.appendChild(time);
+      messagesEl.appendChild(wrapper);
+      scrollToBottom();
+    }
+
+    function appendChips(items) {
+      var chipsWrap = document.createElement('div');
+      chipsWrap.className = 'chat-chips';
+
+      items.forEach(function (item) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'chat-chip' + (item.variant ? ' chat-chip--' + item.variant : '');
+
+        if (item.variant === 'whatsapp') {
+          btn.innerHTML =
+            '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">' +
+            '<path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.77 14.07c-.24.68-1.41 1.3-1.95 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.66-.61-2.92-1.26-4.82-4.2-4.96-4.4-.14-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.27-.29.59-.36.79-.36h.57c.18 0 .42-.07.66.5.24.58.83 2.02.9 2.17.07.15.12.33.02.53-.1.2-.15.33-.3.5-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.29.76 1.26 1.63 2.04 1.12 1 2.07 1.31 2.36 1.46.29.15.46.12.63-.07.17-.19.73-.85.92-1.14.2-.29.39-.24.66-.14.27.1 1.71.81 2 .95.29.15.49.22.56.34.07.12.07.7-.17 1.38z"/>' +
+            '</svg>' +
+            '<span>' +
+            item.label +
+            '</span>';
+        } else {
+          btn.textContent = item.label;
+        }
+
+        btn.addEventListener('click', function () {
+          if (item.intent === 'whatsapp') {
+            var directUrl = buildWhatsAppUrl(
+              'Olá, equipe ALTACORP! Gostaria de tirar dúvidas sobre infraestrutura de TI.'
+            );
+            if (directUrl) {
+              window.open(directUrl, '_blank', 'noopener,noreferrer');
+            }
+          }
+          chipsWrap.remove();
+          handleUserMessage(item.label, item.intent);
+        });
+        chipsWrap.appendChild(btn);
+      });
+
+      messagesEl.appendChild(chipsWrap);
+      scrollToBottom();
+    }
+
+    function showTyping(callback) {
+      var typing = document.createElement('div');
+      typing.className = 'chat-typing';
+      typing.innerHTML = '<span></span><span></span><span></span>';
+      messagesEl.appendChild(typing);
+      scrollToBottom();
+
+      setTimeout(function () {
+        if (typing.parentNode) typing.remove();
+        callback();
+      }, 480);
+    }
+
+    function buildContactCard() {
+      var card = document.createElement('form');
+      card.className = 'chat-contact-card';
+
+      var nameInput = document.createElement('input');
+      nameInput.type = 'text';
+      nameInput.placeholder = 'Seu nome *';
+      nameInput.required = true;
+
+      var contactInput = document.createElement('input');
+      contactInput.type = 'text';
+      contactInput.placeholder = 'E-mail ou WhatsApp *';
+      contactInput.required = true;
+
+      var msgInput = document.createElement('textarea');
+      msgInput.placeholder = 'Como podemos ajudar sua empresa? *';
+      msgInput.required = true;
+
+      var submitBtn = document.createElement('button');
+      submitBtn.type = 'submit';
+      submitBtn.className = 'chat-contact-card__submit';
+      submitBtn.textContent = 'Enviar mensagem';
+
+      card.appendChild(nameInput);
+      card.appendChild(contactInput);
+      card.appendChild(msgInput);
+      card.appendChild(submitBtn);
+
+      card.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var name = nameInput.value.trim();
+        var contact = contactInput.value.trim();
+        var msg = msgInput.value.trim();
+        if (!name || !contact || !msg) return;
+
+        var endpoint = String((config.form && config.form.endpoint) || '').trim();
+        var method = String((config.form && config.form.method) || 'POST').toUpperCase();
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+
+        if (endpoint) {
+          fetch(endpoint, {
+            method: method,
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+            body: JSON.stringify({
+              nome: name,
+              contato: contact,
+              mensagem: msg,
+              origem: 'Chat Flutuante ALTACORP',
+            }),
+          })
+            .then(function (res) {
+              if (!res.ok) throw new Error('HTTP ' + res.status);
+              card.remove();
+              appendMessage(
+                'bot',
+                'Mensagem recebida, ' +
+                name +
+                '! Nossa equipe técnica analisará seu contato e responderá em breve.'
+              );
+            })
+            .catch(function () {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Enviar mensagem';
+              showDirectChannelOptions(name, contact, msg);
+            });
+        } else {
+          card.remove();
+          showDirectChannelOptions(name, contact, msg);
+        }
+      });
+
+      return card;
+    }
+
+    function showDirectChannelOptions(name, contact, msg) {
+      var summary =
+        'Contato via Chat ALTACORP\nNome: ' +
+        name +
+        '\nContato: ' +
+        contact +
+        '\nMensagem: ' +
+        msg;
+
+      var actions = document.createElement('div');
+      actions.className = 'chat-inline-actions';
+
+      var waUrl = buildWhatsAppUrl(summary);
+      var mailUrl = buildMailtoUrl('Contato via site — ' + name, summary);
+
+      if (waUrl) {
+        var waBtn = document.createElement('a');
+        waBtn.href = waUrl;
+        waBtn.target = '_blank';
+        waBtn.rel = 'noopener noreferrer';
+        waBtn.className = 'chat-inline-btn chat-inline-btn--primary';
+        waBtn.textContent = 'Enviar no WhatsApp';
+        actions.appendChild(waBtn);
+      }
+
+      if (mailUrl) {
+        var mailBtn = document.createElement('a');
+        mailBtn.href = mailUrl;
+        mailBtn.className = 'chat-inline-btn';
+        mailBtn.textContent = 'Enviar por E-mail';
+        actions.appendChild(mailBtn);
+      }
+
+      var formBtn = document.createElement('button');
+      formBtn.type = 'button';
+      formBtn.className = 'chat-inline-btn';
+      formBtn.textContent = 'Ir para formulário completo';
+      formBtn.addEventListener('click', function () {
+        var descField = document.getElementById('field-description');
+        var nameField = document.getElementById('field-name');
+        if (nameField && !nameField.value) nameField.value = name;
+        if (descField && !descField.value) descField.value = msg + ' (Contato: ' + contact + ')';
+        closeChat();
+        var contatoEl = document.getElementById('contato');
+        if (contatoEl) contatoEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      actions.appendChild(formBtn);
+
+      appendMessage(
+        'bot',
+        'Obrigado, ' +
+        name +
+        '! Sua mensagem foi preparada. Escolha abaixo como deseja encaminhar para nossa equipe:',
+        actions
+      );
+    }
+
+    function getBotReply(text, forcedIntent) {
+      var q = String(text || '').toLowerCase();
+
+      if (forcedIntent === 'whatsapp' || /whatsapp/.test(q)) {
+        var waDirectUrl = buildWhatsAppUrl(
+          'Olá, equipe ALTACORP! Gostaria de tirar dúvidas sobre infraestrutura de TI.'
+        );
+        var waActions = document.createElement('div');
+        waActions.className = 'chat-inline-actions';
+        var waLink = document.createElement('a');
+        waLink.href = waDirectUrl || 'https://wa.me/5511983641085';
+        waLink.target = '_blank';
+        waLink.rel = 'noopener noreferrer';
+        waLink.className = 'chat-inline-btn chat-inline-btn--whatsapp';
+        waLink.textContent = 'Abrir WhatsApp (11) 98364-1085';
+        waActions.appendChild(waLink);
+
+        appendMessage(
+          'bot',
+          'Redirecionando para o nosso WhatsApp. Caso a janela não tenha aberto automaticamente, clique abaixo:',
+          waActions
+        );
+        return;
+      }
+
+      if (forcedIntent === 'pricing' || /(preço|preco|preços|precos|valor|valores|quanto custa|investimento|plano|planos)/.test(q)) {
+        appendMessage(
+          'bot',
+          'Nossos valores são personalizados conforme o porte do ambiente (quantidade de servidores, estações, firewall, política de backup e nível de suporte/SLA).\nQuer receber uma estimativa ou proposta para sua empresa?'
+        );
+        appendChips([
+          { label: 'Solicitar orçamento', intent: 'contact' },
+          { label: 'Falar no WhatsApp', intent: 'whatsapp', variant: 'whatsapp' },
+          { label: 'Ver serviços', intent: 'services' },
+        ]);
+        return;
+      }
+
+      if (forcedIntent === 'support' || /(suporte|chamado|incidente|atendimento)/.test(q)) {
+        appendMessage(
+          'bot',
+          'Oferecemos suporte técnico especializado e administração contínua para empresas (monitoramento, servidores, redes, firewall e backup).\nComo prefere prosseguir com seu atendimento?'
+        );
+        appendChips([
+          { label: 'Solicitar uma cotação', intent: 'contact' },
+          { label: 'Falar no WhatsApp', intent: 'whatsapp', variant: 'whatsapp' },
+          { label: 'Serviços e Infraestrutura', intent: 'services' },
+        ]);
+        return;
+      }
+
+      if (forcedIntent === 'contact' || /(contato|mensagem|orçamento|orcamento|cotação|cotacao|avaliacao|avaliação|falar|email|proposta)/.test(q)) {
+        appendMessage(
+          'bot',
+          'Claro! Preencha os campos abaixo para solicitar uma cotação ou enviar sua mensagem para nossa equipe:',
+          buildContactCard()
+        );
+        return;
+      }
+
+      if (forcedIntent === 'services' || /(serviço|servico|rede|servidor|administração|administracao|infraestrutura)/.test(q)) {
+        var svcActions = document.createElement('div');
+        svcActions.className = 'chat-inline-actions';
+        var svcLink = document.createElement('a');
+        svcLink.href = '#servicos';
+        svcLink.className = 'chat-inline-btn chat-inline-btn--primary';
+        svcLink.textContent = 'Ver seção de Serviços';
+        svcLink.addEventListener('click', closeChat);
+        svcActions.appendChild(svcLink);
+
+        appendMessage(
+          'bot',
+          'Atuamos com Infraestrutura de Redes, Servidores e Virtualização, Firewall e Segurança, Backup e Recuperação, Monitoramento e Administração contínua de TI para PMEs.',
+          svcActions
+        );
+        appendChips([
+          { label: 'Solicitar uma cotação', intent: 'contact' },
+          { label: 'Quais tecnologias vocês usam?', intent: 'tech' },
+        ]);
+        return;
+      }
+
+      if (forcedIntent === 'tech' || /(tecnologia|proxmox|opnsense|unifi|tailscale|zabbix|qnap|truenas|linux|windows|backup|firewall)/.test(q)) {
+        var techActions = document.createElement('div');
+        techActions.className = 'chat-inline-actions';
+        var techLink = document.createElement('a');
+        techLink.href = '#tecnologias';
+        techLink.className = 'chat-inline-btn chat-inline-btn--primary';
+        techLink.textContent = 'Explorar Tecnologias';
+        techLink.addEventListener('click', closeChat);
+        techActions.appendChild(techLink);
+
+        appendMessage(
+          'bot',
+          'Trabalhamos com plataformas consolidadas: Proxmox VE, Firewall OPNsense, Redes UniFi & TailScale, Linux, Windows Server, Monitoramento Zabbix e Backup QNAP & TrueNAS.',
+          techActions
+        );
+        appendChips([
+          { label: 'Solicitar uma cotação', intent: 'contact' },
+          { label: 'Ver serviços', intent: 'services' },
+        ]);
+        return;
+      }
+
+      appendMessage(
+        'bot',
+        'Posso ajudar com dúvidas sobre nossos serviços de infraestrutura, suporte técnico, tecnologias ou cotações para sua empresa.'
+      );
+      appendChips([
+        { label: 'Serviços e Infraestrutura', intent: 'services' },
+        { label: 'Tecnologias utilizadas', intent: 'tech' },
+        { label: 'Suporte Técnico', intent: 'support' },
+        { label: 'Preços de serviços', intent: 'pricing' },
+        { label: 'Solicitar uma cotação', intent: 'contact' },
+        { label: 'Falar no WhatsApp', intent: 'whatsapp', variant: 'whatsapp' },
+      ]);
+    }
+
+    function handleUserMessage(text, forcedIntent) {
+      var trimmed = String(text || '').trim();
+      if (!trimmed) return;
+      appendMessage('user', trimmed);
+      showTyping(function () {
+        getBotReply(trimmed, forcedIntent);
+      });
+    }
+
+    function startConversation() {
+      messagesEl.innerHTML = '';
+      appendMessage(
+        'bot',
+        'Olá! Sou o assistente virtual da ALTACORP.\nComo posso ajudar com a infraestrutura de TI da sua empresa hoje?'
+      );
+      appendChips([
+        { label: 'Serviços e Infraestrutura', intent: 'services' },
+        { label: 'Tecnologias utilizadas', intent: 'tech' },
+        { label: 'Suporte Técnico', intent: 'support' },
+        { label: 'Preços de serviços', intent: 'pricing' },
+        { label: 'Solicitar uma cotação', intent: 'contact' },
+        { label: 'Falar no WhatsApp', intent: 'whatsapp', variant: 'whatsapp' },
+      ]);
+      hasInitialized = true;
+    }
+
+    function openChat() {
+      isOpen = true;
+      fab.classList.add('is-open');
+      fab.setAttribute('aria-expanded', 'true');
+      chatWindow.classList.add('is-open');
+      chatWindow.setAttribute('aria-hidden', 'false');
+      if (tooltip) tooltip.classList.remove('is-visible');
+      if (!hasInitialized) startConversation();
+      setTimeout(function () {
+        chatInput.focus();
+      }, 220);
+    }
+
+    function closeChat() {
+      isOpen = false;
+      fab.classList.remove('is-open');
+      fab.setAttribute('aria-expanded', 'false');
+      chatWindow.classList.remove('is-open');
+      chatWindow.setAttribute('aria-hidden', 'true');
+    }
+
+    fab.addEventListener('click', function () {
+      if (isOpen) closeChat();
+      else openChat();
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeChat);
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', startConversation);
+    }
+
+    chatForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var val = chatInput.value.trim();
+      if (!val) return;
+      chatInput.value = '';
+      handleUserMessage(val);
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && isOpen) {
+        closeChat();
+      }
+    });
+
+    if (tooltip) {
+      fab.addEventListener('mouseenter', function () {
+        if (!isOpen) tooltip.classList.add('is-visible');
+      });
+
+      fab.addEventListener('mouseleave', function () {
+        tooltip.classList.remove('is-visible');
+      });
+
+      fab.addEventListener('focus', function () {
+        if (!isOpen) tooltip.classList.add('is-visible');
+      });
+
+      fab.addEventListener('blur', function () {
+        tooltip.classList.remove('is-visible');
+      });
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initFooterYear();
     initConfiguredContacts();
     initHeaderAndMobileMenu();
+    initMegaMenu();
     initHeroWorkbenchTabs();
     initTechCategoryFilters();
     initActiveNavObserver();
@@ -601,5 +1105,6 @@
     initServicePreselection();
     initContactForm();
     initSmoothScroll();
+    initChatWidget();
   });
 })();

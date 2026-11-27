@@ -13,9 +13,9 @@ window.ALTACORP_CONFIG = {
     // Ex.: 'contato@altacorp.com.br' — mantenha vazio até definir o e-mail oficial
     email: '',
     // Somente dígitos com DDI + DDD (ex.: '5511999999999')
-    whatsappNumber: '',
+    whatsappNumber: '5511983641085',
     // Texto de exibição opcional (ex.: '+55 (11) 99999-9999')
-    whatsappDisplay: '',
+    whatsappDisplay: '(11) 98364-1085',
     whatsappDefaultMessage:
       'Olá, equipe ALTACORP. Gostaria de solicitar uma avaliação técnica para a infraestrutura de TI da nossa empresa.',
   },

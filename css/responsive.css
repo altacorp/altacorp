@@ -4,7 +4,11 @@
 
 @media (max-width: 1120px) {
   .primary-nav {
-    gap: 20px;
+    gap: 2px;
+  }
+
+  .primary-nav__link {
+    padding: 8px 12px;
   }
 
   .feature-row {
@@ -191,5 +195,104 @@
   .form-submit-row {
     flex-direction: column;
     align-items: stretch;
+  }
+}
+
+/* ==========================================================================
+   Hero — Breakpoints Progressivos para Conforto Visual em Monitores Menores
+   ========================================================================== */
+@media (max-width: 1440px) {
+  .hero-title {
+    font-size: 3.125rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.0625rem;
+    max-width: 610px;
+  }
+}
+
+@media (max-width: 1366px) {
+  .hero {
+    padding-block: 76px 56px;
+  }
+
+  .hero-title {
+    font-size: 2.75rem;
+  }
+
+  .hero-subtitle {
+    margin-top: 18px;
+    font-size: 1rem;
+    max-width: 580px;
+  }
+
+  .hero-actions {
+    margin-top: 28px;
+  }
+
+  .tech-marquee {
+    margin-top: 92px;
+  }
+}
+
+@media (max-width: 1120px) {
+  .hero {
+    padding-block: 64px 48px;
+  }
+
+  .hero-title {
+    font-size: 2.45rem;
+  }
+
+  .hero-subtitle {
+    margin-top: 16px;
+    font-size: 0.96875rem;
+    max-width: 540px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9375rem;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding-block: 48px 40px;
+  }
+
+  .hero-title {
+    font-size: 1.875rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+}
+
+@media (min-width: 768px) and (max-height: 760px) {
+  .hero {
+    padding-block: 60px 44px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.15rem, 3.2vw, 2.7rem);
+  }
+
+  .hero-subtitle {
+    margin-top: 16px;
+    font-size: 0.96875rem;
+  }
+
+  .tech-marquee {
+    margin-top: 74px;
   }
 }

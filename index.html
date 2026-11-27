@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>altacomp</title>
+    <title>AltaCorp</title>
     <meta
       name="description"
       content="Projetamos, implementamos e administramos ambientes de TI para pequenas e médias empresas que precisam de estabilidade, segurança e continuidade operacional."
@@ -101,12 +101,234 @@
         </a>
 
         <nav class="primary-nav" aria-label="Navegação principal">
-          <a href="#inicio">Início</a>
-          <a href="#servicos">Serviços</a>
-          <a href="#solucoes">Soluções</a>
-          <a href="#tecnologias">Tecnologias</a>
-          <a href="#sobre">Sobre nós</a>
-          <a href="#contato">Contato</a>
+          <a href="#inicio" class="primary-nav__link">Início</a>
+
+          <div class="nav-item nav-item--has-dropdown">
+            <a href="#servicos" class="primary-nav__link" aria-haspopup="true" aria-expanded="false">Serviços</a>
+            <div class="mega-menu" role="region" aria-label="Opções de Serviços">
+              <div class="mega-menu__content">
+                <div class="mega-menu__group">
+                  <div class="mega-menu__label">Por área de atuação</div>
+                  <div class="mega-menu__grid">
+                    <a href="#servicos" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--network" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="3" width="20" height="6" rx="1.5" />
+                        <rect x="2" y="15" width="20" height="6" rx="1.5" />
+                        <path d="M6 6h.01M6 18h.01M12 9v6" />
+                      </svg>
+                      <span>Infraestrutura de Redes</span>
+                    </a>
+                    <a href="#servicos" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--server" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="16" rx="2" />
+                        <path d="M7 9h10M7 13h6M7 17h4" />
+                      </svg>
+                      <span>Servidores e Virtualização</span>
+                    </a>
+                    <a href="#servicos" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--security" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      </svg>
+                      <span>Firewall e Segurança</span>
+                    </a>
+                    <a href="#servicos" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--backup" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <ellipse cx="12" cy="5" rx="9" ry="3" />
+                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                        <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
+                      </svg>
+                      <span>Backup e Recuperação</span>
+                    </a>
+                    <a href="#servicos" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--monitor" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                      </svg>
+                      <span>Monitoramento e Disponibilidade</span>
+                    </a>
+                    <a href="#servicos" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--ops" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="3" />
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.6.77 1 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                      </svg>
+                      <span>Administração de TI</span>
+                    </a>
+                  </div>
+                  <a href="#servicos" class="mega-menu__all-link">Ver todos os serviços</a>
+                </div>
+
+                <div class="mega-menu__group">
+                  <div class="mega-menu__label">Por objetivo de negócio</div>
+                  <div class="mega-menu__grid">
+                    <a href="#solucoes" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--monitor" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                      </svg>
+                      <span>Alta Disponibilidade</span>
+                    </a>
+                    <a href="#solucoes" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--security" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="11" width="18" height="11" rx="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                      </svg>
+                      <span>Segurança Corporativa</span>
+                    </a>
+                    <a href="#servicos" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--backup" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
+                      </svg>
+                      <span>Continuidade e Backup</span>
+                    </a>
+                    <a href="#sobre" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--community" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                      </svg>
+                      <span>Gestão para PMEs</span>
+                    </a>
+                    <a href="#contato" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--ops" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                      </svg>
+                      <span>Diagnóstico Técnico</span>
+                    </a>
+                    <a href="#solucoes" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--network" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                      </svg>
+                      <span>Conectividade e VPN</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <a href="#servicos" class="mega-menu__feature">
+                <img src="assets/images/infra-operations.jpg" alt="Operação de infraestrutura de TI" loading="lazy" />
+                <div class="mega-menu__feature-overlay">
+                  <div class="mega-menu__feature-title">Infraestrutura sob controle</div>
+                  <p class="mega-menu__feature-desc">
+                    Projetamos, implementamos e administramos ambientes corporativos com estabilidade e segurança.
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="nav-item nav-item--has-dropdown">
+            <a href="#tecnologias" class="primary-nav__link" aria-haspopup="true" aria-expanded="false">Tecnologia</a>
+            <div class="mega-menu" role="region" aria-label="Opções de Tecnologia">
+              <div class="mega-menu__content">
+                <div class="mega-menu__group">
+                  <div class="mega-menu__label">Plataformas e Ferramentas</div>
+                  <div class="mega-menu__grid">
+                    <a href="#tecnologias" class="mega-menu__item" data-mega-tech="virtualizacao">
+                      <svg class="mega-icon mega-icon--server" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                        <polyline points="2 17 12 22 22 17" />
+                        <polyline points="2 12 12 17 22 12" />
+                      </svg>
+                      <span>Virtualização (Proxmox VE)</span>
+                    </a>
+                    <a href="#tecnologias" class="mega-menu__item" data-mega-tech="seguranca">
+                      <svg class="mega-icon mega-icon--security" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        <path d="M9 12l2 2 4-4" />
+                      </svg>
+                      <span>Firewall OPNsense</span>
+                    </a>
+                    <a href="#tecnologias" class="mega-menu__item" data-mega-tech="sistemas">
+                      <svg class="mega-icon mega-icon--ops" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="4 17 10 11 4 5" />
+                        <line x1="12" y1="19" x2="20" y2="19" />
+                      </svg>
+                      <span>Linux &amp; Windows Server</span>
+                    </a>
+                    <a href="#tecnologias" class="mega-menu__item" data-mega-tech="redes">
+                      <svg class="mega-icon mega-icon--network" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+                        <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+                        <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+                        <line x1="12" y1="20" x2="12.01" y2="20" />
+                      </svg>
+                      <span>Redes Unifi &amp; TailScale</span>
+                    </a>
+                    <a href="#tecnologias" class="mega-menu__item" data-mega-tech="monitoramento">
+                      <svg class="mega-icon mega-icon--monitor" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="3" width="20" height="14" rx="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                      </svg>
+                      <span>Monitoramento Zabbix</span>
+                    </a>
+                    <a href="#tecnologias" class="mega-menu__item" data-mega-tech="backup">
+                      <svg class="mega-icon mega-icon--backup" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+                      </svg>
+                      <span>Backup QNAP &amp; TrueNAS</span>
+                    </a>
+                  </div>
+                  <a href="#tecnologias" class="mega-menu__all-link" data-mega-tech="all">Ver todas as tecnologias</a>
+                </div>
+
+                <div class="mega-menu__group">
+                  <div class="mega-menu__label">Arquitetura e Metodologia</div>
+                  <div class="mega-menu__grid">
+                    <a href="#solucoes" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--community" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                        <line x1="9" y1="9" x2="9.01" y2="9" />
+                        <line x1="15" y1="9" x2="15.01" y2="9" />
+                      </svg>
+                      <span>Soluções Open Source</span>
+                    </a>
+                    <a href="#solucoes" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--ops" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                      </svg>
+                      <span>Documentação Técnica</span>
+                    </a>
+                    <a href="#sobre" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--security" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="9 11 12 14 22 4" />
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                      </svg>
+                      <span>Diagnóstico e Planejamento</span>
+                    </a>
+                    <a href="#sobre" class="mega-menu__item">
+                      <svg class="mega-icon mega-icon--monitor" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                      <span>Administração Contínua</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <a href="#tecnologias" class="mega-menu__feature">
+                <img src="assets/images/hero-datacenter.jpg" alt="Stack tecnológico ALTACORP" loading="lazy" />
+                <div class="mega-menu__feature-overlay">
+                  <div class="mega-menu__feature-title">Stack corporativo moderno</div>
+                  <p class="mega-menu__feature-desc">
+                    Tecnologias consolidadas e open source para máxima performance e controle do seu ambiente.
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <a href="#sobre" class="primary-nav__link">Sobre</a>
+          <a href="#contato" class="primary-nav__link">Área do cliente</a>
         </nav>
 
         <div class="header-actions">
@@ -139,10 +361,9 @@
         <nav class="container mobile-nav" aria-label="Navegação mobile">
           <a href="#inicio">Início <span aria-hidden="true">→</span></a>
           <a href="#servicos">Serviços <span aria-hidden="true">→</span></a>
-          <a href="#solucoes">Soluções <span aria-hidden="true">→</span></a>
-          <a href="#tecnologias">Tecnologias <span aria-hidden="true">→</span></a>
-          <a href="#sobre">Sobre nós <span aria-hidden="true">→</span></a>
-          <a href="#contato">Contato <span aria-hidden="true">→</span></a>
+          <a href="#tecnologias">Tecnologia <span aria-hidden="true">→</span></a>
+          <a href="#sobre">Sobre <span aria-hidden="true">→</span></a>
+          <a href="#contato">Área do cliente <span aria-hidden="true">→</span></a>
           <a href="#contato" class="btn btn--primary mobile-nav__cta">Solicitar avaliação</a>
         </nav>
       </div>
@@ -156,11 +377,11 @@
         <div class="container">
           <div class="hero-header">
             <h1 class="hero-title">
-              Tecnologia Estratégica
+              Tecnologia para Empresas
             </h1>
             <p class="hero-subtitle">
-              Projetamos, implementamos e administramos ambientes de TI para pequenas e médias empresas que precisam
-              de estabilidade, segurança e continuidade operacional.
+              Projetamos, implementamos e administramos ambientes de TI para pequenas e médias empresas. Entregamos
+              soluções confiáveis para manter sua operação estável, segura e preparada para crescer.
             </p>
             <div class="hero-actions">
               <a href="#contato" class="btn btn--primary">
@@ -188,6 +409,8 @@
                 <li class="tech-marquee__item"><img src="assets/logos/tailscale.svg" alt="" width="24" height="24" /><span>Tailscale</span></li>
                 <li class="tech-marquee__item"><img src="assets/logos/zabbix.svg" alt="" width="24" height="24" /><span>Zabbix</span></li>
                 <li class="tech-marquee__item"><img src="assets/logos/qnap.svg" alt="" width="24" height="24" /><span>QNAP</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/truenas.svg" alt="" width="24" height="24" /><span>TrueNAS</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/bitdefender.svg" alt="" width="24" height="24" /><span>Bitdefender</span></li>
               </ul>
               <ul class="tech-marquee__group" aria-hidden="true">
                 <li class="tech-marquee__item"><img src="assets/logos/proxmox.svg" alt="" width="24" height="24" /><span>Proxmox VE</span></li>
@@ -199,6 +422,8 @@
                 <li class="tech-marquee__item"><img src="assets/logos/tailscale.svg" alt="" width="24" height="24" /><span>Tailscale</span></li>
                 <li class="tech-marquee__item"><img src="assets/logos/zabbix.svg" alt="" width="24" height="24" /><span>Zabbix</span></li>
                 <li class="tech-marquee__item"><img src="assets/logos/qnap.svg" alt="" width="24" height="24" /><span>QNAP</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/truenas.svg" alt="" width="24" height="24" /><span>TrueNAS</span></li>
+                <li class="tech-marquee__item"><img src="assets/logos/bitdefender.svg" alt="" width="24" height="24" /><span>Bitdefender</span></li>
               </ul>
             </div>
           </div>
@@ -325,52 +550,89 @@
         </div>
       </section>
 
-      <!-- Faixa horizontal de ecossistema tecnológico -->
-      <div class="ecosystem-strip" aria-label="Tecnologias operadas pela ALTACORP">
-        <div class="container ecosystem-strip__inner">
-          <p class="ecosystem-strip__label">
-            Plataformas e tecnologias consolidadas operadas pela ALTACORP
-          </p>
-          <div class="ecosystem-logos">
-            <span class="ecosystem-logo-item">
-              <img src="assets/logos/proxmox.svg" alt="" width="20" height="20" />
-              Proxmox VE
-            </span>
-            <span class="ecosystem-logo-item">
-              <img src="assets/logos/opnsense.svg" alt="" width="20" height="20" />
-              OPNsense
-            </span>
-            <span class="ecosystem-logo-item">
-              <img src="assets/logos/linux.svg" alt="" width="20" height="20" />
-              Linux
-            </span>
-            <span class="ecosystem-logo-item">
-              <img src="assets/logos/windows-server.svg" alt="" width="20" height="20" />
-              Windows Server
-            </span>
-            <span class="ecosystem-logo-item">
-              <img src="assets/logos/unifi.svg" alt="" width="20" height="20" />
-              UniFi
-            </span>
-            <span class="ecosystem-logo-item">
-              <img src="assets/logos/wireguard.svg" alt="" width="20" height="20" />
-              WireGuard
-            </span>
-            <span class="ecosystem-logo-item">
-              <img src="assets/logos/tailscale.svg" alt="" width="20" height="20" />
-              Tailscale
-            </span>
-            <span class="ecosystem-logo-item">
-              <img src="assets/logos/zabbix.svg" alt="" width="20" height="20" />
-              Zabbix
-            </span>
-            <span class="ecosystem-logo-item">
-              <img src="assets/logos/qnap.svg" alt="" width="20" height="20" />
-              QNAP
-            </span>
+      <!-- ================================================================
+           PROVA SOCIAL / DEPOIMENTOS (Layout Editorial 3 Cards)
+           ================================================================ -->
+      <section class="testimonials-section" aria-label="Depoimentos de clientes sobre a ALTACORP">
+        <div class="container testimonials-layout">
+          <div class="testimonials-intro" data-reveal>
+            <span class="eyebrow">Prova social</span>
+            <h2 class="section-title testimonials-title">Avaliação de Clientes</h2>
+
+            <ul class="testimonials-highlights">
+              <li>
+                <span class="testimonials-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Servidores &amp; Virtualização</span>
+              </li>
+              <li>
+                <span class="testimonials-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Cibersegurança</span>
+              </li>
+              <li>
+                <span class="testimonials-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Suporte especializado</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="testimonials-grid" data-reveal>
+            <div class="testimonials-col">
+              <article class="t-card t-card--compact">
+                <p class="t-card__quote">
+                  “Consolidamos seis servidores físicos antigos em um cluster Proxmox VE sem nenhuma parada não programada. Hoje temos alta disponibilidade real.”
+                </p>
+                <div class="t-card__meta">
+                  <div class="t-avatar" aria-hidden="true">RM</div>
+                  <div>
+                    <div class="t-card__name">RICARDO MENDES</div>
+                    <div class="t-card__role">Diretor de Operações • Grupo Vértice</div>
+                    <div class="t-stars" aria-label="5 de 5 estrelas">★★★★★</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="t-card t-card--split">
+                <div class="t-card__side-badge" aria-hidden="true">
+                  <span>CF</span>
+                  <small>OPNsense</small>
+                </div>
+                <div class="t-card__split-body">
+                  <p class="t-card__quote">
+                    “A segmentação de VLANs e o firewall OPNsense resolveram gargalos antigos de segurança e VPN.”
+                  </p>
+                  <div class="t-card__name">CAMILA FERREIRA</div>
+                  <div class="t-card__role">Gerente de TI • Clínica Paulista</div>
+                  <div class="t-stars" aria-label="5 de 5 estrelas">★★★★★</div>
+                </div>
+              </article>
+            </div>
+
+            <div class="testimonials-col testimonials-col--center">
+              <article class="t-card t-card--centered">
+                <div class="t-avatar t-avatar--lg" aria-hidden="true">EV</div>
+                <div class="t-card__name">EDUARDO VASCONCELOS</div>
+                <div class="t-card__role">Sócio • NorteSul Contabilidade</div>
+                <div class="t-stars" aria-label="5 de 5 estrelas">★★★★★</div>
+                <p class="t-card__quote">
+                  “Estruturaram nossa rotina de backup em QNAP e TrueNAS com retenção automatizada e testes de restauração.”
+                </p>
+              </article>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <!-- ================================================================
            4.3 APRESENTAÇÃO INSTITUCIONAL
@@ -1264,6 +1526,125 @@
         </div>
       </div>
     </footer>
+
+    <!-- ==================================================================
+         WIDGET DE CHAT FLUTUANTE (Assistente ALTACORP)
+         ================================================================== -->
+    <div id="altacorp-chat" class="chat-widget-root">
+      <div id="chat-tooltip" class="chat-tooltip" role="status" aria-live="polite">
+        <span>Tire suas dúvidas por aqui!</span>
+      </div>
+
+      <section
+        id="chat-window"
+        class="chat-window"
+        role="dialog"
+        aria-label="Assistente Virtual ALTACORP"
+        aria-hidden="true"
+      >
+        <header class="chat-header">
+          <div class="chat-header__info">
+            <div class="chat-header__avatar" aria-hidden="true">
+              <svg viewBox="0 0 44 44" width="32" height="32" fill="none">
+                <path class="robot-wave robot-wave--outer" d="M14.5 7.5C17.5 4.8 26.5 4.8 29.5 7.5" stroke="#388BFF" stroke-width="1.8" stroke-linecap="round" />
+                <path class="robot-wave robot-wave--inner" d="M17.2 10.2C18.8 8.8 25.2 8.8 26.8 10.2" stroke="#0868D7" stroke-width="1.8" stroke-linecap="round" />
+                <rect x="7" y="18" width="2.8" height="7" rx="1.4" fill="#388BFF" />
+                <rect x="34.2" y="18" width="2.8" height="7" rx="1.4" fill="#388BFF" />
+                <rect x="9.5" y="13" width="25" height="20" rx="9" fill="#0868D7" />
+                <rect x="13" y="17.5" width="18" height="9.5" rx="4.75" fill="#FFFFFF" />
+                <circle class="robot-eye" cx="18" cy="22.25" r="2" fill="#0868D7" />
+                <circle class="robot-eye" cx="26" cy="22.25" r="2" fill="#0868D7" />
+                <path d="M18.5 29.5C20 30.8 24 30.8 25.5 29.5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" />
+                <path d="M17 36.2H27" stroke="#388BFF" stroke-width="2.2" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div>
+              <h2 class="chat-header__title">Chat Assistente</h2>
+              <p class="chat-header__status">
+                <span class="chat-status-dot" aria-hidden="true"></span>
+                Online • Dúvidas e Contato
+              </p>
+            </div>
+          </div>
+
+          <div class="chat-header__actions">
+            <button
+              type="button"
+              id="chat-reset"
+              class="chat-header__btn"
+              title="Reiniciar conversa"
+              aria-label="Reiniciar conversa"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="23 4 23 10 17 10" />
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              id="chat-close"
+              class="chat-header__btn"
+              title="Fechar chat"
+              aria-label="Fechar chat"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
+
+        <form id="chat-form" class="chat-input-bar" autocomplete="off">
+          <input
+            id="chat-input"
+            type="text"
+            class="chat-input"
+            placeholder="Digite sua dúvida ou mensagem..."
+            aria-label="Digite sua dúvida ou mensagem"
+          />
+          <button type="submit" class="chat-send-btn" aria-label="Enviar mensagem">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
+          </button>
+        </form>
+      </section>
+
+      <button
+        id="chat-fab"
+        type="button"
+        class="chat-fab"
+        aria-expanded="false"
+        aria-controls="chat-window"
+        aria-label="Abrir chat com assistente virtual ALTACORP"
+      >
+        <span class="chat-fab__status" aria-hidden="true"></span>
+        <span class="chat-fab__icon chat-fab__icon--robot" aria-hidden="true">
+          <svg viewBox="0 0 44 44" width="40" height="40" fill="none">
+            <path class="robot-wave robot-wave--outer" d="M14.5 7.5C17.5 4.8 26.5 4.8 29.5 7.5" stroke="#BAE6FD" stroke-width="1.8" stroke-linecap="round" />
+            <path class="robot-wave robot-wave--inner" d="M17.2 10.2C18.8 8.8 25.2 8.8 26.8 10.2" stroke="#E0F2FE" stroke-width="1.8" stroke-linecap="round" />
+            <rect x="7" y="18" width="2.8" height="7" rx="1.4" fill="#BAE6FD" />
+            <rect x="34.2" y="18" width="2.8" height="7" rx="1.4" fill="#BAE6FD" />
+            <rect x="9.5" y="13" width="25" height="20" rx="9" fill="#FFFFFF" />
+            <rect x="13" y="17.5" width="18" height="9.5" rx="4.75" fill="#0868D7" />
+            <circle class="robot-eye" cx="18" cy="22.25" r="2" fill="#FFFFFF" />
+            <circle class="robot-eye" cx="26" cy="22.25" r="2" fill="#FFFFFF" />
+            <path d="M18.5 29.5C20 30.8 24 30.8 25.5 29.5" stroke="#0868D7" stroke-width="1.8" stroke-linecap="round" />
+            <path d="M17 36.2H27" stroke="#E0F2FE" stroke-width="2.2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <span class="chat-fab__icon chat-fab__icon--close" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </span>
+      </button>
+    </div>
 
     <script src="js/config.js"></script>
     <script src="js/main.js"></script>
