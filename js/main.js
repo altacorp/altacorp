@@ -1093,12 +1093,460 @@
     }
   }
 
+  function initOpenSourceOrbit() {
+    var container = document.getElementById('opensource-orbit');
+    if (!container) return;
+
+    var ringEls = Array.prototype.slice.call(container.querySelectorAll('.orbit-ring'));
+    var nodeEls = Array.prototype.slice.call(container.querySelectorAll('.orbit-node'));
+    if (!ringEls.length || !nodeEls.length) return;
+
+    var prefersReduced =
+      window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function getRadii() {
+      return ringEls.map(function (ring) {
+        return ring.offsetWidth / 2;
+      });
+    }
+
+    var radii = getRadii();
+    var center = container.offsetWidth / 2;
+
+    // Velocidade angular leve no sentido horário (rad/s) por órbita
+    var orbitSpeeds = [0.2, 0.13, 0.085];
+
+    var nodes = nodeEls.map(function (el) {
+      var orbitIdx = parseInt(el.getAttribute('data-orbit') || '0', 10);
+      var angleDeg = parseFloat(el.getAttribute('data-angle') || '0');
+      return {
+        el: el,
+        orbit: orbitIdx,
+        radius: radii[orbitIdx] || 100,
+        startRadius: radii[orbitIdx] || 100,
+        targetRadius: radii[orbitIdx] || 100,
+        hopProgress: 1,
+        angle: (angleDeg * Math.PI) / 180,
+        isDragging: false,
+        dragX: 0,
+        dragY: 0,
+      };
+    });
+
+    function positionNode(node, x, y) {
+      var w = node.el.offsetWidth;
+      var h = node.el.offsetHeight;
+      node.el.style.transform =
+        'translate3d(' + (x - w / 2).toFixed(2) + 'px, ' + (y - h / 2).toFixed(2) + 'px, 0)';
+    }
+
+    function updateMetrics() {
+      radii = getRadii();
+      center = container.offsetWidth / 2;
+      nodes.forEach(function (n) {
+        n.targetRadius = radii[n.orbit];
+        if (n.hopProgress >= 1 && !n.isDragging) {
+          n.radius = n.targetRadius;
+        }
+      });
+    }
+
+    window.addEventListener('resize', updateMetrics, { passive: true });
+
+    // Salto autônomo ocasional de apenas UMA bolinha por vez
+    var activeHopper = null;
+    var lastHopTime = performance.now();
+    var nextHopDelay = 3400;
+
+    function countNodesInOrbit(orbitIdx) {
+      var count = 0;
+      nodes.forEach(function (n) {
+        if (n.orbit === orbitIdx) count++;
+      });
+      return count;
+    }
+
+    function normalizeAngle(a) {
+      var twoPi = Math.PI * 2;
+      return ((a % twoPi) + twoPi) % twoPi;
+    }
+
+    function shortestAngleDiff(a, b) {
+      return Math.atan2(Math.sin(a - b), Math.cos(a - b));
+    }
+
+    function getMinArcAngle(orbitIdx) {
+      var r = Math.max(radii[orbitIdx] || 80, 56);
+      var nodeSize = orbitIdx === 0 ? 52 : orbitIdx === 1 ? 44 : 38;
+      // Garante folga mínima entre bordas de bolinhas na mesma linha
+      return Math.min(Math.PI * 0.85, (nodeSize + 18) / r);
+    }
+
+    function findClearAngleForOrbit(orbitIdx, preferredAngle, excludeNode) {
+      var minArc = getMinArcAngle(orbitIdx);
+      var peers = nodes
+        .filter(function (n) {
+          return n !== excludeNode && n.orbit === orbitIdx && !n.isDragging;
+        })
+        .map(function (n) {
+          return normalizeAngle(n.angle);
+        })
+        .sort(function (a, b) {
+          return a - b;
+        });
+
+      if (!peers.length) return preferredAngle;
+
+      var prefNorm = normalizeAngle(preferredAngle);
+      var hasConflict = peers.some(function (p) {
+        return Math.abs(shortestAngleDiff(prefNorm, p)) < minArc;
+      });
+      if (!hasConflict) return preferredAngle;
+
+      // Encontra o maior espaço livre na órbita destino
+      var bestMid = prefNorm;
+      var bestGap = -1;
+      for (var i = 0; i < peers.length; i++) {
+        var current = peers[i];
+        var next = i + 1 < peers.length ? peers[i + 1] : peers[0] + Math.PI * 2;
+        var gap = next - current;
+        if (gap > bestGap) {
+          bestGap = gap;
+          bestMid = current + gap / 2;
+        }
+      }
+      return preferredAngle + shortestAngleDiff(bestMid, preferredAngle);
+    }
+
+    function triggerSingleAutonomousHop(now) {
+      if (activeHopper || nodes.some(function (n) { return n.isDragging; })) return;
+
+      // Garante que uma linha nunca fique com menos de 1 bolinha
+      var eligibleCandidates = nodes.filter(function (n) {
+        return countNodesInOrbit(n.orbit) > 1;
+      });
+      if (!eligibleCandidates.length) return;
+
+      var candidate = eligibleCandidates[Math.floor(Math.random() * eligibleCandidates.length)];
+
+      var possibleOrbits = [0, 1, 2].filter(function (idx) {
+        return idx !== candidate.orbit && Math.abs(idx - candidate.orbit) === 1;
+      });
+      if (!possibleOrbits.length) return;
+
+      // Prefere órbitas com menos bolinhas para manter o visual equilibrado
+      possibleOrbits.sort(function (a, b) {
+        return countNodesInOrbit(a) - countNodesInOrbit(b);
+      });
+      var minCount = countNodesInOrbit(possibleOrbits[0]);
+      var balancedOrbits = possibleOrbits.filter(function (idx) {
+        return countNodesInOrbit(idx) === minCount;
+      });
+      var nextOrbit = balancedOrbits[Math.floor(Math.random() * balancedOrbits.length)];
+
+      candidate.orbit = nextOrbit;
+      candidate.el.setAttribute('data-orbit', String(nextOrbit));
+      candidate.startRadius = candidate.radius;
+      candidate.targetRadius = radii[nextOrbit];
+      candidate.startAngle = candidate.angle;
+      candidate.targetAngle = findClearAngleForOrbit(nextOrbit, candidate.angle, candidate);
+      candidate.hopProgress = 0;
+      activeHopper = candidate;
+      lastHopTime = now;
+      nextHopDelay = 3600 + Math.random() * 2400;
+    }
+
+    // Arrastar e soltar entre órbitas (Pointer Events)
+    var draggedNode = null;
+
+    function findNearestOrbit(dist) {
+      var bestIdx = 0;
+      var bestDiff = Infinity;
+      radii.forEach(function (r, idx) {
+        var diff = Math.abs(dist - r);
+        if (diff < bestDiff) {
+          bestDiff = diff;
+          bestIdx = idx;
+        }
+      });
+      return bestIdx;
+    }
+
+    function highlightRing(activeIdx) {
+      ringEls.forEach(function (ring, idx) {
+        ring.classList.toggle('is-target', idx === activeIdx);
+      });
+    }
+
+    nodes.forEach(function (node) {
+      node.el.addEventListener('pointerdown', function (e) {
+        e.preventDefault();
+        draggedNode = node;
+        node.isDragging = true;
+        node.hopProgress = 1;
+        if (activeHopper === node) activeHopper = null;
+        node.el.classList.add('is-dragging');
+        if (node.el.setPointerCapture) {
+          node.el.setPointerCapture(e.pointerId);
+        }
+
+        var rect = container.getBoundingClientRect();
+        node.dragX = e.clientX - rect.left;
+        node.dragY = e.clientY - rect.top;
+        positionNode(node, node.dragX, node.dragY);
+      });
+
+      node.el.addEventListener('pointermove', function (e) {
+        if (draggedNode !== node) return;
+        var rect = container.getBoundingClientRect();
+        var x = Math.max(20, Math.min(rect.width - 20, e.clientX - rect.left));
+        var y = Math.max(20, Math.min(rect.height - 20, e.clientY - rect.top));
+        node.dragX = x;
+        node.dragY = y;
+        positionNode(node, x, y);
+
+        var dx = x - center;
+        var dy = y - center;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        highlightRing(findNearestOrbit(dist));
+      });
+
+      function endDrag() {
+        if (draggedNode !== node) return;
+        var dx = node.dragX - center;
+        var dy = node.dragY - center;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        var nearest = findNearestOrbit(dist);
+        var previousOrbit = node.orbit;
+
+        // Se a órbita anterior ficaria vazia (< 1 bolinha), troca com uma bolinha da órbita destino
+        if (nearest !== previousOrbit && countNodesInOrbit(previousOrbit) <= 1) {
+          var swapPartner = null;
+          for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i] !== node && nodes[i].orbit === nearest) {
+              swapPartner = nodes[i];
+              break;
+            }
+          }
+          if (swapPartner) {
+            swapPartner.orbit = previousOrbit;
+            swapPartner.el.setAttribute('data-orbit', String(previousOrbit));
+            swapPartner.startRadius = swapPartner.radius;
+            swapPartner.targetRadius = radii[previousOrbit];
+            swapPartner.startAngle = swapPartner.angle;
+            swapPartner.targetAngle = findClearAngleForOrbit(
+              previousOrbit,
+              swapPartner.angle,
+              swapPartner
+            );
+            swapPartner.hopProgress = 0;
+          } else {
+            nearest = previousOrbit;
+          }
+        }
+
+        var dropAngle = Math.atan2(dy, dx);
+        node.orbit = nearest;
+        node.el.setAttribute('data-orbit', String(nearest));
+        node.angle = dropAngle;
+        node.startAngle = dropAngle;
+        node.targetAngle = findClearAngleForOrbit(nearest, dropAngle, node);
+        node.startRadius = dist;
+        node.targetRadius = radii[nearest];
+        node.hopProgress = 0;
+        node.isDragging = false;
+        node.el.classList.remove('is-dragging');
+        highlightRing(-1);
+        draggedNode = null;
+        lastHopTime = performance.now();
+      }
+
+      node.el.addEventListener('pointerup', endDrag);
+      node.el.addEventListener('pointercancel', endDrag);
+    });
+
+    var lastFrame = performance.now();
+
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function tick(now) {
+      var dt = Math.min((now - lastFrame) / 1000, 0.05);
+      lastFrame = now;
+
+      if (!prefersReduced && now - lastHopTime >= nextHopDelay) {
+        triggerSingleAutonomousHop(now);
+      }
+
+      nodes.forEach(function (node) {
+        if (node.isDragging) return;
+
+        var speed = !prefersReduced ? orbitSpeeds[node.orbit] || 0.12 : 0;
+        node.angle += speed * dt;
+
+        if (node.hopProgress < 1) {
+          node.hopProgress = Math.min(1, node.hopProgress + dt / 0.75);
+          var eased = easeInOutCubic(node.hopProgress);
+          node.radius = node.startRadius + (node.targetRadius - node.startRadius) * eased;
+          if (typeof node.startAngle === 'number' && typeof node.targetAngle === 'number') {
+            node.startAngle += speed * dt;
+            node.targetAngle += speed * dt;
+            node.angle =
+              node.startAngle + shortestAngleDiff(node.targetAngle, node.startAngle) * eased;
+          }
+          if (node.hopProgress >= 1 && activeHopper === node) {
+            activeHopper = null;
+          }
+        } else {
+          node.radius = radii[node.orbit];
+        }
+      });
+
+      // Repulsão suave entre bolinhas na mesma órbita para nunca se sobreporem
+      [0, 1, 2].forEach(function (orbitIdx) {
+        var orbitNodes = nodes.filter(function (n) {
+          return !n.isDragging && n.orbit === orbitIdx;
+        });
+        if (orbitNodes.length < 2) return;
+        var minArc = getMinArcAngle(orbitIdx);
+
+        for (var i = 0; i < orbitNodes.length; i++) {
+          for (var j = i + 1; j < orbitNodes.length; j++) {
+            var a = orbitNodes[i];
+            var b = orbitNodes[j];
+            var diff = shortestAngleDiff(a.angle, b.angle);
+            var absDiff = Math.abs(diff);
+            if (absDiff < minArc) {
+              var push = (minArc - absDiff) * Math.min(1, dt * 8) * 0.5;
+              var dir = diff >= 0 ? 1 : -1;
+              a.angle += dir * push;
+              b.angle -= dir * push;
+            }
+          }
+        }
+      });
+
+      nodes.forEach(function (node) {
+        if (node.isDragging) return;
+        var x = center + node.radius * Math.cos(node.angle);
+        var y = center + node.radius * Math.sin(node.angle);
+        positionNode(node, x, y);
+      });
+
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  function initShowcaseImageParallax() {
+    var frames = Array.prototype.slice.call(document.querySelectorAll('.feature-frame'));
+    if (!frames.length) return;
+
+    var items = frames
+      .map(function (frame) {
+        var img = frame.querySelector('.feature-frame__inner img');
+        if (!img) return null;
+        return {
+          frame: frame,
+          img: img,
+          curX: 0,
+          curY: 0,
+          curScale: 1.1,
+          hoverX: 0,
+          hoverY: 0,
+          hoverScale: 0,
+        };
+      })
+      .filter(Boolean);
+
+    if (!items.length) return;
+
+    items.forEach(function (item) {
+      item.frame.addEventListener('mousemove', function (e) {
+        var rect = item.frame.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        var nx = (e.clientX - rect.left) / rect.width - 0.5;
+        var ny = (e.clientY - rect.top) / rect.height - 0.5;
+        item.hoverX = -nx * 18;
+        item.hoverY = -ny * 18;
+        item.hoverScale = 0.05;
+        ensureLoop();
+      });
+
+      item.frame.addEventListener('mouseleave', function () {
+        item.hoverX = 0;
+        item.hoverY = 0;
+        item.hoverScale = 0;
+        ensureLoop();
+      });
+    });
+
+    var rafId = null;
+
+    function tick() {
+      var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      var needsMore = false;
+
+      items.forEach(function (item) {
+        var rect = item.frame.getBoundingClientRect();
+        var center = rect.top + rect.height / 2;
+        var progress = Math.max(-1, Math.min(1, (vh / 2 - center) / (vh / 2 + rect.height / 2)));
+
+        var targetY = progress * 26 + item.hoverY;
+        var targetX = item.hoverX;
+        var targetScale = 1.12 - Math.abs(progress) * 0.03 + item.hoverScale;
+
+        item.curX += (targetX - item.curX) * 0.14;
+        item.curY += (targetY - item.curY) * 0.14;
+        item.curScale += (targetScale - item.curScale) * 0.14;
+
+        if (
+          Math.abs(targetX - item.curX) > 0.05 ||
+          Math.abs(targetY - item.curY) > 0.05 ||
+          Math.abs(targetScale - item.curScale) > 0.0005
+        ) {
+          needsMore = true;
+        }
+
+        item.img.style.transform =
+          'translate3d(' +
+          item.curX.toFixed(2) +
+          'px, ' +
+          item.curY.toFixed(2) +
+          'px, 0) scale(' +
+          item.curScale.toFixed(4) +
+          ')';
+      });
+
+      if (needsMore) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        rafId = null;
+      }
+    }
+
+    function ensureLoop() {
+      if (rafId === null) {
+        rafId = requestAnimationFrame(tick);
+      }
+    }
+
+    window.addEventListener('scroll', ensureLoop, { passive: true });
+    window.addEventListener('wheel', ensureLoop, { passive: true });
+    window.addEventListener('resize', ensureLoop, { passive: true });
+    ensureLoop();
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initFooterYear();
     initConfiguredContacts();
     initHeaderAndMobileMenu();
     initMegaMenu();
     initHeroWorkbenchTabs();
+    initShowcaseImageParallax();
+    initOpenSourceOrbit();
     initTechCategoryFilters();
     initActiveNavObserver();
     initRevealAnimations();

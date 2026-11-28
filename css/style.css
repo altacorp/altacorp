@@ -857,6 +857,8 @@ textarea {
   object-fit: cover;
   display: block;
   opacity: 0.96;
+  transform: scale(1.1);
+  will-change: transform;
 }
 
 /* ==========================================================================
@@ -1107,6 +1109,495 @@ textarea {
 
   .t-card--split {
     grid-template-columns: 80px 1fr;
+  }
+}
+
+/* ==========================================================================
+   Seção Open Source & Impacto Financeiro (Universo Orbital Interativo)
+   ========================================================================== */
+.opensource-universe-section {
+  position: relative;
+  isolation: isolate;
+  padding-block: 88px;
+  overflow: hidden;
+  background-color: #f8f9fb;
+}
+
+.opensource-universe-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+.opensource-universe-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 500px);
+  gap: 56px;
+  align-items: center;
+}
+
+.opensource-universe-copy {
+  max-width: 560px;
+}
+
+.opensource-universe-copy .section-title {
+  margin-bottom: 18px;
+}
+
+.opensource-universe-lead {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.68;
+  color: var(--navy);
+  font-weight: 500;
+}
+
+.opensource-universe-muted {
+  margin: 14px 0 0;
+  font-size: 0.96875rem;
+  line-height: 1.68;
+  color: var(--gray-muted);
+}
+
+.opensource-universe-points {
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.opensource-universe-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--gray-muted);
+}
+
+.opensource-universe-points strong {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.opensource-point-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--tech-blue);
+  margin-top: 8px;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px rgba(8, 104, 215, 0.12);
+}
+
+/* Universo Orbital (Inspirado no Orkut com paleta ALTACORP) */
+.opensource-orbit-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.opensource-orbit {
+  position: relative;
+  width: 440px;
+  height: 440px;
+  max-width: 100%;
+  touch-action: none;
+  user-select: none;
+}
+
+.orbit-glow {
+  position: absolute;
+  inset: 14px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(8, 104, 215, 0.14) 0%,
+    rgba(56, 139, 255, 0.08) 44%,
+    rgba(243, 246, 250, 0.02) 70%,
+    transparent 76%
+  );
+  pointer-events: none;
+}
+
+.orbit-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.orbit-ring--0 {
+  width: 156px;
+  height: 156px;
+  border: 1.5px solid rgba(8, 104, 215, 0.34);
+  background: radial-gradient(circle, rgba(8, 104, 215, 0.04) 0%, transparent 72%);
+}
+
+.orbit-ring--1 {
+  width: 272px;
+  height: 272px;
+  border: 1.5px solid rgba(8, 104, 215, 0.22);
+}
+
+.orbit-ring--2 {
+  width: 388px;
+  height: 388px;
+  border: 1.5px dashed rgba(8, 104, 215, 0.28);
+  animation: orbitRingSpin 46s linear infinite;
+}
+
+.orbit-ring.is-target {
+  border-color: var(--tech-blue);
+  box-shadow: 0 0 0 4px rgba(8, 104, 215, 0.1);
+}
+
+.orbit-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 68px;
+  height: 68px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: var(--white);
+  border: 2px solid rgba(8, 104, 215, 0.24);
+  box-shadow: 0 12px 30px -6px rgba(8, 104, 215, 0.24), 0 0 0 8px rgba(8, 104, 215, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.orbit-core img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.orbit-node {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--white);
+  border: 2px solid rgba(8, 104, 215, 0.45);
+  box-shadow: 0 8px 20px -6px rgba(11, 23, 40, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  padding: 0;
+  z-index: 4;
+  will-change: transform;
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.25s ease, box-shadow 0.2s ease;
+}
+
+.orbit-node[data-orbit='0'] {
+  width: 52px;
+  height: 52px;
+  border-color: var(--tech-blue);
+}
+
+.orbit-node[data-orbit='1'] {
+  width: 44px;
+  height: 44px;
+  border-color: rgba(8, 104, 215, 0.55);
+}
+
+.orbit-node[data-orbit='2'] {
+  width: 38px;
+  height: 38px;
+  border-color: rgba(100, 116, 139, 0.5);
+}
+
+.orbit-node img {
+  width: 56%;
+  height: 56%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.orbit-node img.orbit-node__img--grafana {
+  width: 68%;
+  height: 68%;
+}
+
+.orbit-node__label {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-2px);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--navy);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.orbit-node:hover,
+.orbit-node:focus-visible {
+  box-shadow: 0 12px 26px -6px rgba(8, 104, 215, 0.36), 0 0 0 4px rgba(8, 104, 215, 0.14);
+  z-index: 6;
+  outline: none;
+}
+
+.orbit-node:hover .orbit-node__label,
+.orbit-node:focus-visible .orbit-node__label {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.orbit-node.is-dragging {
+  cursor: grabbing;
+  z-index: 10;
+  box-shadow: 0 18px 34px -6px rgba(8, 104, 215, 0.42), 0 0 0 5px rgba(8, 104, 215, 0.18);
+  transition: box-shadow 0.15s ease;
+}
+
+.orbit-node.is-dragging .orbit-node__label {
+  opacity: 0;
+}
+
+.orbit-hint {
+  margin: 8px 0 0;
+  font-size: 0.78125rem;
+  color: var(--gray-muted);
+  text-align: center;
+}
+
+@keyframes orbitRingSpin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@media (max-width: 1023px) {
+  .opensource-universe-section {
+    padding-block: 68px;
+  }
+
+  .opensource-universe-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .opensource-universe-copy {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .opensource-orbit {
+    width: 320px;
+    height: 320px;
+  }
+
+  .orbit-ring--0 {
+    width: 114px;
+    height: 114px;
+  }
+
+  .orbit-ring--1 {
+    width: 198px;
+    height: 198px;
+  }
+
+  .orbit-ring--2 {
+    width: 282px;
+    height: 282px;
+  }
+
+  .orbit-core {
+    width: 54px;
+    height: 54px;
+  }
+
+  .orbit-core img {
+    width: 26px;
+    height: 26px;
+  }
+
+  .orbit-node[data-orbit='0'] {
+    width: 42px;
+    height: 42px;
+  }
+
+  .orbit-node[data-orbit='1'] {
+    width: 36px;
+    height: 36px;
+  }
+
+  .orbit-node[data-orbit='2'] {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-ring--2 {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Seção Segmentos que Atendemos (Grade à Esquerda + Título à Direita)
+   ========================================================================== */
+.segments-section {
+  background-color: #f4f4f6;
+  border-top: 1px solid var(--gray-border);
+  border-bottom: 1px solid var(--gray-border);
+  padding-block: 84px;
+}
+
+.segments-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 56px;
+  align-items: center;
+}
+
+.segments-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.segment-card {
+  background-color: var(--white);
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius-lg);
+  padding: 22px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+  min-height: 128px;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.segment-card:hover {
+  border-color: rgba(8, 104, 215, 0.38);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -10px rgba(11, 23, 40, 0.1);
+}
+
+.segment-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background-color: #f8fafd;
+  border: 1px solid #e7ecf4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--transition), background-color var(--transition), border-color var(--transition);
+}
+
+.segment-card:hover .segment-card__icon {
+  transform: scale(1.06);
+  background-color: var(--white);
+  border-color: rgba(8, 104, 215, 0.25);
+}
+
+.segment-card__title {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--navy);
+}
+
+.segments-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.segments-intro .section-title {
+  margin-bottom: 16px;
+}
+
+.segments-desc {
+  margin: 0;
+  font-size: 0.96875rem;
+  line-height: 1.65;
+  color: var(--gray-muted);
+}
+
+@media (max-width: 1120px) {
+  .segments-layout {
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 36px;
+  }
+
+  .segments-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1023px) {
+  .segments-section {
+    padding-block: 68px;
+  }
+
+  .segments-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .segments-intro {
+    order: -1;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .segments-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .segments-section {
+    padding-block: 56px;
+  }
+
+  .segments-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .segment-card {
+    min-height: 112px;
+    padding: 18px 12px;
   }
 }
 
@@ -2247,8 +2738,10 @@ textarea.form-control {
   height: 100%;
   aspect-ratio: auto;
   object-fit: cover;
-  object-position: center top;
+  object-position: center center;
   opacity: 1;
+  transform: scale(1.1);
+  will-change: transform;
 }
 
 /* Espaçamento ampliado entre as linhas da vitrine */
